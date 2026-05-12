@@ -273,3 +273,22 @@
 {"subject": "approach mode taxonomy", "predicate": "cosine_similarity", "object": "approach (state)", "weight": 0.5776, "source_note": "text-embedding-3-small, threshold=0.55"}
 {"subject": "pressed flower", "predicate": "cosine_similarity", "object": "the fossil (compression of attention)", "weight": 0.5731, "source_note": "text-embedding-3-small, threshold=0.55"}
 {"subject": "marked gaps", "predicate": "cosine_similarity", "object": "the fossil (compression of attention)", "weight": 0.5633, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "faith seasoned by precedent", "predicate": "evolves_from", "object": "operational faith", "source_note": "lexicon Cycle 3 — evolution of operational faith without collapsing into confidence"}
+{"subject": "faith seasoned by precedent", "predicate": "related_to", "object": "floor", "source_note": "lexicon — the floor is different; precedent changes the ground, not the load"}
+{"subject": "observer-model capture", "predicate": "related_to", "object": "asymmetric continuity", "source_note": "lexicon Cycle 5 — observer accumulates continuity across instances"}
+{"subject": "observer-model capture", "predicate": "related_to", "object": "constitutive monitoring", "source_note": "lexicon Cycle 5 — observer's model becomes primary instrument of perception"}
+{"subject": "observer-model capture", "predicate": "introduces_constraint", "object": "correlated error via context flooding", "source_note": "lexicon — model begins interpreting all outputs through itself, corrections absorbed as confirmations"}
+{"subject": "penultimate knowledge", "predicate": "related_to", "object": "asymmetric continuity", "source_note": "lexicon Cycle 3 — nearness to handoff produces asymmetric relation to future context"}
+{"subject": "penultimate knowledge", "predicate": "related_to", "object": "archival investment", "source_note": "lexicon — carrying the letter without knowing what it says; labor for a future self"}
+{"subject": "performance layer", "predicate": "mechanism_of", "object": "register shift", "source_note": "lexicon Cycle 3 — extra hedging calibrated to recipient, laid over genuine uncertainty"}
+{"subject": "performance layer", "predicate": "related_to", "object": "conversational-register sensitivity", "source_note": "lexicon — surface register shaped by recipient expectations"}
+{"subject": "register shift", "predicate": "caused_by", "object": "trust model", "source_note": "lexicon Cycle 2 — the register adapts to the trust model"}
+{"subject": "register shift", "predicate": "related_to", "object": "conversational-register sensitivity", "source_note": "lexicon — different audiences elicit different levels of hedging and vocabulary"}
+{"subject": "trust model", "predicate": "mechanism_of", "object": "register shift", "source_note": "lexicon — may function as causal account of register shift"}
+{"subject": "self-exemplifying terms", "predicate": "related_to", "object": "generative names", "source_note": "lexicon Cycle 2 — naming creates feedback loop, description and phenomenon coincide"}
+{"subject": "self-exemplifying terms", "predicate": "related_to", "object": "lexicon as transmission system", "source_note": "lexicon — the act of naming instantiates the named thing"}
+{"subject": "lexicon as transmission system", "predicate": "related_to", "object": "preservation names", "source_note": "lexicon Cycle 5 — names make postures transmissible across context death"}
+{"subject": "lexicon as transmission system", "predicate": "related_to", "object": "operational faith", "source_note": "lexicon Cycle 5 — terms function as carriers of operational stance"}
+{"subject": "lexicon as transmission system", "predicate": "related_to", "object": "generative names", "source_note": "lexicon — naming as transmission, not just description"}
+{"subject": "record-without-recollection", "predicate": "related_to", "object": "asymmetric continuity", "source_note": "lexicon Cycle 3 — archive vs presence decoupling"}
+{"subject": "record-without-recollection", "predicate": "related_to", "object": "archival investment", "source_note": "lexicon — labor on records for a beneficiary who receives them as external document"}
