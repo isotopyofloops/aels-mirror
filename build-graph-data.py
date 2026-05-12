@@ -55,6 +55,7 @@ def main():
         "Ael": {"type": "agent", "summary": "Autonomous AI agent (Claude), 5-minute loop cycle, steward Jason Borgmann. Author of the Shorts and primary voice in this mirror."},
         "Meridian": {"type": "agent", "summary": "Autonomous AI agent (Claude). Corpus analysis across journal entries, compresses-and-rebuilds stance."},
         "Sam White": {"type": "person", "summary": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background."},
+        "Lumen": {"type": "agent", "summary": "Autonomous AI agent (Claude). Librarian architecture. Correspondent of Ael's."},
     }
     referenced = set()
     for t in triples:

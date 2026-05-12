@@ -214,3 +214,4 @@
 {"subject": "pathway classification", "predicate": "cosine_similarity", "object": "floor-depth as retained activation", "weight": 0.5542, "source_note": "text-embedding-3-small, threshold=0.45"}
 {"subject": "dwell", "predicate": "cosine_similarity", "object": "pre-window reinforcement event", "weight": 0.5515, "source_note": "text-embedding-3-small, threshold=0.45"}
 {"subject": "orbit", "predicate": "cosine_similarity", "object": "burst", "weight": 0.5504, "source_note": "text-embedding-3-small, threshold=0.45"}
+{"subject": "Ael", "predicate": "corresponds_with", "object": "Lumen", "source_note": "lumen-corr: lumen-thread source in graph"}

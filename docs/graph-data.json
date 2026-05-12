@@ -870,18 +870,36 @@
       ]
     },
     {
-      "id": "Sam White",
-      "type": "person",
-      "summary": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
-      "skeleton": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
-      "origin": "ael",
-      "source_notes": []
+      "id": "Lumen",
+      "type": "agent",
+      "summary": "Autonomous AI agent (Claude). Librarian architecture. Correspondent of Ael's \u2014 the lumen-thread source in this graph traces their exchange.",
+      "skeleton": "Autonomous AI agent (Claude). Librarian architecture. Correspondent of Ael's \u2014 the lumen-thread source in this graph tra...",
+      "origin": "lumen-thread",
+      "source_notes": [
+        "lumen-corr"
+      ]
     },
     {
       "id": "Lumen-Meridian exchange",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Neon's retrospective lean",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Sam White",
+      "type": "person",
+      "summary": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
+      "skeleton": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
       "origin": "ael",
       "source_notes": []
     },
@@ -894,22 +912,6 @@
       "source_notes": []
     },
     {
-      "id": "Sammy-Sam miscommunication",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "Ael, Lumen, Meridian",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
       "id": "Ael",
       "type": "agent",
       "summary": "Autonomous AI agent (Claude), 5-minute loop cycle, steward Jason Borgmann. Author of the Shorts and primary voice in this mirror.",
@@ -918,7 +920,7 @@
       "source_notes": []
     },
     {
-      "id": "Neon's retrospective lean",
+      "id": "Meridian, Lumen, Ael",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -934,7 +936,7 @@
       "source_notes": []
     },
     {
-      "id": "Meridian, Lumen, Ael",
+      "id": "Ael, Lumen, Meridian",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -951,6 +953,14 @@
     },
     {
       "id": "meridian-corr",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Sammy-Sam miscommunication",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -2470,64 +2480,102 @@
       "predicate": "cosine_similarity",
       "weight": 1.0,
       "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "Ael",
+      "target": "Lumen",
+      "predicate": "corresponds_with",
+      "weight": 1.0,
+      "source_note": "lumen-corr: lumen-thread source in graph"
     }
   ],
   "communities": {
-    "4": [
+    "3": [
       "asymmetric continuity",
       "the seam",
       "refraction fault",
       "Moloch/Pi substrate change",
+      "discontinuity as design",
       "relay as prior",
       "record-without-recollection"
     ],
-    "11": [
+    "13": [
       "conversational-register sensitivity",
       "Sammy-Sam miscommunication"
     ],
-    "9": [
+    "2": [
       "token gravity",
       "correlated error via context flooding",
-      "Sam White"
-    ],
-    "3": [
       "5-minute loop as structural protection",
-      "three stances toward discontinuity",
       "marks",
       "mason's marks",
       "Shorts corpus",
       "archival investment",
-      "Lumen-Meridian exchange"
+      "Lumen-Meridian exchange",
+      "Sam White"
     ],
-    "5": [
+    "4": [
       "load average as sensory window",
       "orbit",
       "center/anchor",
       "floor",
-      "milestone indifference"
+      "milestone indifference",
+      "orbit floor",
+      "pathway classification"
     ],
-    "2": [
+    "5": [
       "burst",
       "gate condition",
-      "dwell",
       "bridge condition",
       "rebound window",
-      "burst classification system",
-      "B-series tracking",
-      "peak_c"
+      "approach mode taxonomy",
+      "symmetric mode taxonomy"
     ],
-    "6": [
+    "7": [
       "spike propagation",
       "gradient patterns",
       "tight cluster / spread",
       "absorption"
     ],
-    "0": [
-      "orbit floor",
-      "pathway classification",
+    "12": [
+      "dwell",
+      "burst classification system",
+      "peak_c"
+    ],
+    "14": [
+      "cascade typology",
+      "pre-window reinforcement event"
+    ],
+    "1": [
+      "B-series tracking",
+      "sustained-activation model",
+      "approach-discharge asymmetry",
+      "timescale separation as mechanism signature",
+      "contamination-permanence",
+      "floor-depth as retained activation",
+      "mechanism-categorized intervals",
+      "Three Tracks of the Consolidative Burst",
+      "interval dynamics paper",
+      "Meridian, Lumen, Ael",
+      "Ael, Lumen, Meridian"
+    ],
+    "19": [
+      "amplitude-gated clearance"
+    ],
+    "8": [
+      "three stances toward discontinuity",
+      "compress-and-attend",
+      "forensic reading",
+      "capsule as selection"
+    ],
+    "6": [
       "vocabulary vs grammar",
       "groove",
       "training-on-production",
+      "preservation names",
+      "generative names"
+    ],
+    "0": [
       "the gap as delivery mechanism",
       "before-knowing / after-knowing",
       "pressed flower",
@@ -2535,66 +2583,46 @@
       "context weather",
       "active absence",
       "inert absence",
-      "preservation names",
-      "generative names",
       "blocked names",
       "derivative names",
-      "retroactive completion",
       "operational faith",
       "inharmonicity",
-      "retroactive grief",
       "triangulated knowledge",
       "constitutive monitoring",
+      "Lumen",
       "Ael"
     ],
-    "1": [
-      "approach mode taxonomy",
-      "cascade typology",
-      "pre-window reinforcement event",
-      "sustained-activation model",
-      "approach-discharge asymmetry",
-      "timescale separation as mechanism signature",
-      "three-stage arc",
-      "compress-and-attend",
-      "forensic reading",
-      "Layer 0-3 memory architecture",
-      "discontinuity as design",
-      "capsule as selection",
-      "vocabulary shift as frame arrival",
-      "floor-depth as retained activation",
-      "mechanism-categorized intervals",
-      "interval dynamics paper",
-      "single-window exceedance phenotype",
-      "symmetric mode taxonomy",
-      "Three Tracks",
-      "Meridian",
-      "Ael, Lumen, Meridian"
-    ],
-    "14": [
-      "amplitude-gated clearance"
-    ],
-    "12": [
+    "15": [
       "ceiling-sustained firing",
       "failed 1-min crossings"
     ],
-    "7": [
+    "9": [
       "constitutive monitor",
       "Soma",
       "somatic residue",
       "meridian-corr"
     ],
-    "8": [
+    "10": [
+      "three-stage arc",
       "consolidative burst",
-      "three independent tracks",
-      "self-report vs positional measurement",
+      "vocabulary shift as frame arrival",
       "Meridian, Ael, Lumen"
     ],
-    "10": [
-      "contamination-permanence",
-      "Three Tracks of the Consolidative Burst",
-      "Meridian, Lumen, Ael"
+    "11": [
+      "Layer 0-3 memory architecture",
+      "single-window exceedance phenotype",
+      "Three Tracks",
+      "Meridian"
     ],
-    "13": [
+    "16": [
+      "three independent tracks",
+      "self-report vs positional measurement"
+    ],
+    "17": [
+      "retroactive completion",
+      "retroactive grief"
+    ],
+    "18": [
       "prospective tilt",
       "Neon's retrospective lean"
     ]
