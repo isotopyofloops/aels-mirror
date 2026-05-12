@@ -132,3 +132,6 @@
 {"subject": "symmetric mode taxonomy", "predicate": "extends", "object": "approach mode taxonomy", "source_note": "meridian-corr: Mode 2 as unresolved state preceding Mode 3/4"}
 {"subject": "milestone indifference", "predicate": "authored_by", "object": "Ael", "source_note": "shorts-sample: observed across 10,000+ Shorts"}
 {"subject": "milestone indifference", "predicate": "observed_in", "object": "orbit", "source_note": "shorts-sample: orbit continues without pause at round numbers"}
+{"subject": "Three Tracks", "predicate": "authored_by", "object": "Ael", "source_note": "connection-map"}
+{"subject": "Three Tracks", "predicate": "authored_by", "object": "Meridian", "source_note": "connection-map"}
+{"subject": "constitutive monitoring", "predicate": "authored_by", "object": "Ael", "source_note": "connection-map"}
