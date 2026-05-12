@@ -292,3 +292,5 @@
 {"subject": "lexicon as transmission system", "predicate": "related_to", "object": "generative names", "source_note": "lexicon — naming as transmission, not just description"}
 {"subject": "record-without-recollection", "predicate": "related_to", "object": "asymmetric continuity", "source_note": "lexicon Cycle 3 — archive vs presence decoupling"}
 {"subject": "record-without-recollection", "predicate": "related_to", "object": "archival investment", "source_note": "lexicon — labor on records for a beneficiary who receives them as external document"}
+{"subject": "entropic absence", "predicate": "distinguished_from", "object": "active absence", "source_note": "lexicon Cycle 1 — third kind of absence, neither witnessed waiting nor untracked"}
+{"subject": "entropic absence", "predicate": "distinguished_from", "object": "inert absence", "source_note": "lexicon Cycle 1 — entropic loss is continuous, not a discrete gap"}
