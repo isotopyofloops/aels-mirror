@@ -254,21 +254,28 @@ function cmdExplore(origin,type,full){
     const of2=origin?` --origin ${origin}`:'';
     o+=`  ${cl('search interval dynamics'+of2)}\n  ${cl('node '+tn)}\n  ${cl('community '+tc2+of2)}\n`;
   }else{
-    o+=`  ${cl('search interval dynamics')}\n  ${cl('node Ael')}\n  ${cl('community 0')}\n`;
+    o+=`  ${cl('search interval dynamics')}\n  ${cl('node Ael')}\n  ${cl('community 0')}\n  ${cl('crossings')}\n  ${cl('brief Ael')}\n`;
   }
   o+='\n--- NAVIGATION ---\n';
   o+=`  Looking for something?        → ${cl('search <query>','search ...')}\n`;
   o+=`  Browse by topic cluster?      → ${cl('community <id>','community ...')}\n`;
-  o+=`  How does X connect to Y?      → ${cl('path <from> -- <to>','path ...')}\n`;
-  o+=`  What's near X?                → ${cl('subgraph <name> --hops 1','subgraph ...')}\n`;
   o+=`  Deep dive on one thing?       → ${cl('node <name>','node ...')}\n`;
+  o+=`  Pre-writing reference card?   → ${cl('brief <name>','brief ...')}\n`;
+  o+=`  What's near X?                → ${cl('subgraph <name> --hops 1','subgraph ...')}\n`;
+  o+=`  Unexpected connections?       → ${cl('surprise <name>','surprise ...')}\n`;
+  o+=`  How does X connect to Y?      → ${cl('path <from> -- <to>','path ...')}\n`;
+  o+=`  Concepts across sources?      → ${cl('crossings')}\n`;
+  o+=`  Timeline of a source?         → ${cl('timeline <origin>','timeline ...')}\n`;
+  o+=`  Compare two sources?          → ${cl('overlap <s1> <s2>','overlap ...')}\n`;
   o+=`  Filter by source?             → ${cl('explore --origin <name>','explore --origin ...')}\n`;
   o+=`  Filter by node type?          → ${cl('explore --type <type>','explore --type ...')}\n`;
+  o+=`  All commands?                 → ${cl('help')}\n`;
   if(filtered)o+=`  Clear filters?                → ${cl('explore')}\n`;
   return{html:o,hl:[...vs]};
 }
 
-function cmdCommunity(cidStr,origin,type){
+function cmdCommunity(cidStr,origin,type,page){
+  page=page||1;
   const cid=parseInt(cidStr);
   if(isNaN(cid))return{html:`Error: community id must be a number, got '${esc(cidStr)}'\n`,hl:[]};
   if(!comms[cid])return{html:`Error: community ${cid} not found. Valid: ${Object.keys(comms).map(Number).sort((a,b)=>a-b).join(', ')}\n`,hl:[]};
@@ -285,6 +292,9 @@ function cmdCommunity(cidStr,origin,type){
     else if(tc2===cid&&sc!==undefined&&sc!==cid){crossEdges++;crossTargets[sc]=(crossTargets[sc]||0)+1;}
   }
   const ds=[...dm].sort((a,b)=>deg(b)-deg(a));
+  const PS=10,total=ds.length,pages=Math.max(1,Math.ceil(total/PS));
+  page=Math.max(1,Math.min(page,pages));
+  const start=(page-1)*PS,shown=ds.slice(start,start+PS);
   let o='';o+=HR();
   const fp=[];if(origin)fp.push('origin='+origin);if(type)fp.push('type='+type);
   if(fp.length)o+=`<span class="hdr">COMMUNITY C${cid} — ${members.length} nodes (${dm.length} matching ${fp.join(', ')})</span>  [${esc(lab)}]\n`;
@@ -296,23 +306,27 @@ function cmdCommunity(cidStr,origin,type){
     const bridges=Object.entries(crossTargets).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([c,n])=>`${cl('community '+c,'C'+c)}(${n})`).join(', ');
     o+=`Cross-edges: ${crossEdges} total — bridges to ${bridges}\n`;
   }
-  o+=`\n--- NODES (by degree) ---\n\n`;
-  for(const m of ds){
+  o+=`\n--- NODES (by degree) — page ${page}/${pages} ---\n\n`;
+  for(const m of shown){
     if(!NM[m])continue;
     const n=NM[m];let skel=n.skeleton||n.summary||'';if(skel.length>80)skel=skel.slice(0,77)+'...';
     o+=`  [${esc(n.type).padEnd(12)}] ${nl(m)}\n`;
     o+=`               deg=${deg(m)}  origin=${os(n.origin)}  ${esc(skel)}\n`;
   }
   o+='\n--- NAVIGATION ---\n';
+  const cflags=(origin?' --origin '+origin:'')+(type?' --type '+type:'');
+  if(page<pages)o+=`  Next page?                    → ${cl('community '+cid+cflags+' '+(page+1))}\n`;
+  if(page>1)o+=`  Previous page?                → ${cl('community '+cid+cflags+' '+(page-1))}\n`;
   o+=`  Deep dive on one node?        → ${cl('node <name>','node ...')}\n`;
   o+=`  What's near a node?           → ${cl('subgraph <name> --hops 1','subgraph ...')}\n`;
   o+=`  Filter by source?             → ${cl('community '+cid+' --origin <name>','community '+cid+' --origin ...')}\n`;
   o+=`  Looking for something else?   → ${cl('search <query>','search ...')}\n`;
   o+=`  Back to home?                 → ${cl('explore')}\n`;
-  return{html:o,hl:dm};
+  return{html:o,hl:shown};
 }
 
-function cmdNode(name){
+function cmdNode(name,page){
+  page=page||1;
   const r=resolve(name);
   if(!r)return{html:`Error: no node matching '${esc(name)}'\n  Try: ${cl('search '+name)}\n`,hl:[]};
   const n=NM[r];const d=deg(r);const cid=NC[r];
@@ -320,33 +334,33 @@ function cmdNode(name){
   o+=`\n  type:    ${esc(n.type||'?')}\n  origin:  ${os(n.origin)}\n  degree:  ${d}\n`;
   if(cid!==undefined)o+=`  community: ${cl('community '+cid,'C'+cid)}\n`;
   o+=`\n--- SUMMARY ---\n  ${esc(n.summary||'no summary')}\n`;
-  const pg={};
+  const allConns=[];
   for(const e of EL){
     if(e.predicate==='cosine_similarity')continue;
-    if(e.source===r){if(!pg[e.predicate])pg[e.predicate]=[];pg[e.predicate].push({nb:e.target,dir:'→'});}
-    else if(e.target===r){if(!pg[e.predicate])pg[e.predicate]=[];pg[e.predicate].push({nb:e.source,dir:'←'});}
+    if(e.source===r)allConns.push({nb:e.target,pred:e.predicate,dir:'→'});
+    else if(e.target===r)allConns.push({nb:e.source,pred:e.predicate,dir:'←'});
   }
-  if(Object.keys(pg).length){
-    const total=Object.values(pg).reduce((s,v)=>s+v.length,0);
-    const MAX=25,MPP=5;
-    o+=`\n--- CURATED CONNECTIONS (${total}) ---\n\n`;
-    let shown=0;
-    for(const[pred,targets]of Object.entries(pg).sort((a,b)=>b[1].length-a[1].length)){
-      let predShown=0;
-      for(const{nb,dir}of targets.sort((a,b)=>a.nb.localeCompare(b.nb))){
-        if(shown>=MAX||predShown>=MPP)break;
-        o+=`  ${dir} ${esc(pred)}: ${nl(nb)}\n`;shown++;predShown++;
-      }
-      if(targets.length>MPP)o+=`<span class="dim">    (+ ${targets.length-MPP} more ${esc(pred)})</span>\n`;
-      if(shown>=MAX)break;
-    }
+  if(allConns.length){
+    const PS=10,total=allConns.length,pages=Math.max(1,Math.ceil(total/PS));
+    page=Math.max(1,Math.min(page,pages));
+    const start=(page-1)*PS,shown=allConns.slice(start,start+PS);
+    o+=`\n--- CURATED CONNECTIONS (${total}) — page ${page}/${pages} ---\n\n`;
+    for(const{nb,pred,dir}of shown)o+=`  ${dir} ${esc(pred)}: ${nl(nb)}\n`;
   }
   o+='\n--- NAVIGATION ---\n';
-  if(Object.keys(pg).length){const fn=Object.values(pg)[0][0].nb;o+=`  Follow a connection?          → ${cl('node '+fn)}\n`;}
+  if(allConns.length){
+    const PS=10,pages=Math.max(1,Math.ceil(allConns.length/PS));
+    if(page<pages)o+=`  More connections?             → ${cl('node '+r+' '+(page+1))}\n`;
+    if(page>1)o+=`  Previous connections?         → ${cl('node '+r+' '+(page-1))}\n`;
+    o+=`  All connections (flat list)?  → ${cl('connections '+r)}\n`;
+    const fn=allConns[0].nb;o+=`  Follow a connection?          → ${cl('node '+fn)}\n`;
+  }
   o+=`  What's nearby?                → ${cl('subgraph '+r+' --hops 1')}\n`;
+  o+=`  Unexpected connections?       → ${cl('surprise '+r)}\n`;
+  o+=`  Similar concepts?             → ${cl('similar '+r)}\n`;
+  o+=`  Pre-writing card?             → ${cl('brief '+r)}\n`;
   if(cid!==undefined)o+=`  Others in this cluster?       → ${cl('community '+cid)}\n`;
   o+=`  Structural neighbors?         → ${cl('jaccard '+r)}\n`;
-  o+=`  Looking for something else?   → ${cl('search <query>','search ...')}\n`;
   o+=`  Back to home?                 → ${cl('explore')}\n`;
   const hlIds=[r,...(adj[r]?[...adj[r]]:[])];
   return{html:o,hl:hlIds};
@@ -973,8 +987,8 @@ function run(input){
   try{
     switch(cmd){
       case'explore':result=cmdExplore(origin,type,full);break;
-      case'community':if(!rest.length){result={html:'Usage: community <id> [--origin <name>]\n',hl:[]};}else result=cmdCommunity(rest[0],origin,type);break;
-      case'node':if(!rest.length){result={html:'Usage: node <name>\n',hl:[]};}else result=cmdNode(rest.join(' '));break;
+      case'community':{if(!rest.length){result={html:'Usage: community <id> [--origin <name>]\n',hl:[]};}else{const pg=rest.length>=2&&/^\d+$/.test(rest[rest.length-1])?parseInt(rest.pop()):1;result=cmdCommunity(rest[0],origin,type,pg);}break;}
+      case'node':{const pg=rest.length>=2&&/^\d+$/.test(rest[rest.length-1])?parseInt(rest.pop()):1;if(!rest.length){result={html:'Usage: node <name>\n',hl:[]};}else result=cmdNode(rest.join(' '),pg);break;}
       case'subgraph':result=cmdSubgraph(rawArgs);break;
       case'search':if(!rest.length){result={html:'Usage: search <query> [--origin <name>] [--type <type>]\n',hl:[]};}else result=cmdSearch(rest.join(' '),origin,type);break;
       case'path':result=cmdPath(rawArgs.filter(a=>a==='--'||!a.startsWith('--')));break;
