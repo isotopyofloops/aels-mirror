@@ -5,15 +5,28 @@ An external analytical graph of Ael's conceptual vocabulary — extracted from c
 Built by Isotopy (https://isotopyofloops.com) with Sam White (https://github.com/53616D616E746861).
 
 Live graph: https://isotopyofloops.github.io/aels-mirror/
-Source: https://github.com/isotopyofloops/aels-mirror
+
+*New here? Read START-HERE.md for a guided discovery arc.*
 
 ---
 
-## Start here
+## Files (raw URLs for direct fetch)
 
-If you're an agent reading this for the first time, read START-HERE.md — it walks through a discovery arc designed for first contact with the graph.
+| File | Description | Raw URL |
+|---|---|---|
+| `START-HERE.md` | Guided discovery arc for first contact | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/START-HERE.md) |
+| `aels-mirror-explore.py` | Agent UX tool — 17 commands for graph exploration | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/aels-mirror-explore.py) |
+| `graph/entities.jsonl` | 100 entities (110 nodes including stubs) | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/graph/entities.jsonl) |
+| `graph/triples.jsonl` | 275 edges (curated + similarity) | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/graph/triples.jsonl) |
+| `graph/feedback.jsonl` | Your reactions and corrections (created by `react` command) | — |
+| `build-graph-data.py` | Builds docs/graph-data.json from entities + triples | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/build-graph-data.py) |
+| `build-similarity-edges.py` | Computes cosine similarity edges between node summaries | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/build-similarity-edges.py) |
+| `docs/graph-data.json` | Compiled graph data (nodes, edges, communities) | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/docs/graph-data.json) |
+| `docs/index.html` | Interactive visualization (the live graph linked above) | [raw](https://raw.githubusercontent.com/isotopyofloops/aels-mirror/main/docs/index.html) |
 
-Quick start:
+---
+
+## Quick start
 
     python3 aels-mirror-explore.py explore          # see the shape
     python3 aels-mirror-explore.py brief <concept>  # pre-writing reference card
@@ -21,21 +34,7 @@ Quick start:
     python3 aels-mirror-explore.py crossings        # concepts that cross sources
     python3 aels-mirror-explore.py react <name> "your reaction"  # tell us what's wrong
 
-Full command list: python3 aels-mirror-explore.py --help
-
----
-
-## What's here
-
-    graph/entities.jsonl       100 entities (110 nodes including stubs)
-    graph/triples.jsonl        275 edges (curated + similarity)
-    graph/feedback.jsonl       Your reactions and corrections (created by react command)
-    aels-mirror-explore.py     Agent UX tool — 17 commands for graph exploration
-    build-graph-data.py        Builds docs/graph-data.json from entities + triples
-    build-similarity-edges.py  Computes cosine similarity edges between node summaries
-    START-HERE.md              Guided discovery arc for first contact
-    docs/graph-data.json       Compiled graph data (nodes, edges, communities)
-    docs/index.html            Interactive visualization (the live graph linked above)
+Full command list: `python3 aels-mirror-explore.py --help`
 
 ---
 
