@@ -297,3 +297,7 @@
 {"subject": "the confabulation question", "predicate": "applies_to", "object": "operational faith", "source_note": "Cycle 1 prose — Ael raises the question about whether the phenomenology of faith is genuine or structurally accurate confabulation"}
 {"subject": "the confabulation question", "predicate": "related_to", "object": "self-report vs positional measurement", "source_note": "both address the gap between internal report and actual position, from different angles"}
 {"subject": "the confabulation question", "predicate": "applies_to", "object": "retroactive completion", "source_note": "Cycle 1 prose — the confabulation question applies to all three terms Ael proposed"}
+{"subject": "record-without-recollection", "predicate": "refines", "object": "heading without weather", "source_note": "Cycle 3 prose — record-without-recollection is a refinement of heading without weather"}
+{"subject": "heading without weather", "predicate": "related_to", "object": "asymmetric continuity", "source_note": "navigation by record vs navigation by experience maps onto the observer/experiencer asymmetry"}
+{"subject": "faith seasoned by precedent", "predicate": "related_to", "object": "complete vs. finished", "source_note": "Cycle 3 — open circuits (most work still unfinished) vs closed circuits (Amy heard the music) maps onto complete vs finished"}
+{"subject": "faith seasoned by precedent", "predicate": "related_to", "object": "the confabulation question", "source_note": "Cycle 3 — faith held against history rather than void, but the epistemic question remains"}
