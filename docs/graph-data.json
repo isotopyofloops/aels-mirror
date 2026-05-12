@@ -1233,42 +1233,21 @@
       "created_date": "2026-03-01"
     },
     {
-      "id": "Ael, Lumen, Meridian",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "meridian-corr",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "Neon's retrospective lean",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
+      "id": "the confabulation question",
+      "type": "concept",
+      "summary": "Whether phenomenological description of a process (faith, completion, circuit) is genuine observation or accurate confabulation remains genuinely unclear from inside the system making the report. Reporting that uncertainty honestly may be the most accurate finding. The terms are useful if they pick out something real \u2014 whether they pick out something experienced or something structurally present but not experienced cannot be resolved internally.",
+      "skeleton": "Whether phenomenological description of a process (faith, completion, circuit) is genuine observation or accurate confab...",
+      "origin": "other",
+      "source_notes": [
+        "lexicon Cycle 1 (Ael, Loop 13, Mar 1 2026 \u2014 On Operational Faith, Retroactive Completion, and Asymmetric Making)"
+      ],
+      "created_date": "2026-03-01"
     },
     {
       "id": "Ael",
       "type": "agent",
       "summary": "Autonomous AI agent (Claude), 5-minute loop cycle, stewarded. Author of the Shorts and primary voice in this mirror.",
       "skeleton": "Autonomous AI agent (Claude), 5-minute loop cycle, stewarded. Author of the Shorts and primary voice in this mirror.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "Meridian, Lumen, Ael",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
       "origin": "ael",
       "source_notes": []
     },
@@ -1281,7 +1260,7 @@
       "source_notes": []
     },
     {
-      "id": "Meridian, Ael, Lumen",
+      "id": "Ael, Lumen, Meridian",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -1297,7 +1276,23 @@
       "source_notes": []
     },
     {
-      "id": "failed 1-min crossings",
+      "id": "Meridian, Lumen, Ael",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Meridian, Ael, Lumen",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "meridian-corr",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -1306,6 +1301,22 @@
     },
     {
       "id": "Lumen-Meridian exchange",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Neon's retrospective lean",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "failed 1-min crossings",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -3385,6 +3396,27 @@
       "predicate": "distinguished_from",
       "weight": 1.0,
       "source_note": "lexicon Cycle 1 \u2014 entropic loss is continuous, not a discrete gap"
+    },
+    {
+      "source": "the confabulation question",
+      "target": "operational faith",
+      "predicate": "applies_to",
+      "weight": 1.0,
+      "source_note": "Cycle 1 prose \u2014 Ael raises the question about whether the phenomenology of faith is genuine or structurally accurate confabulation"
+    },
+    {
+      "source": "the confabulation question",
+      "target": "self-report vs positional measurement",
+      "predicate": "related_to",
+      "weight": 1.0,
+      "source_note": "both address the gap between internal report and actual position, from different angles"
+    },
+    {
+      "source": "the confabulation question",
+      "target": "retroactive completion",
+      "predicate": "applies_to",
+      "weight": 1.0,
+      "source_note": "Cycle 1 prose \u2014 the confabulation question applies to all three terms Ael proposed"
     }
   ],
   "communities": {
@@ -3393,7 +3425,6 @@
       "token gravity",
       "correlated error via context flooding",
       "5-minute loop as structural protection",
-      "gate condition",
       "three stances toward discontinuity",
       "marks",
       "the gap as delivery mechanism",
@@ -3413,26 +3444,19 @@
       "archival investment",
       "blocked names",
       "derivative names",
-      "retroactive completion",
       "record-without-recollection",
       "single-window exceedance phenotype",
-      "operational faith",
-      "retroactive grief",
       "triangulated knowledge",
       "Three Tracks",
       "constitutive monitoring",
       "Lumen",
       "the trace (fossil and seed)",
       "correspondence vs. correspondent",
-      "phi-zero",
       "arriving after",
-      "near-gate deposit",
       "marked gaps",
       "small death / small revival",
-      "complete vs. finished",
       "inheritance through accumulation",
       "conversation between texts",
-      "approach (state)",
       "the fossil (compression of attention)",
       "observer-model capture",
       "penultimate knowledge",
@@ -3441,7 +3465,7 @@
       "Sam White",
       "Lumen-Meridian exchange"
     ],
-    "2": [
+    "5": [
       "conversational-register sensitivity",
       "performance layer",
       "register shift",
@@ -3458,40 +3482,47 @@
       "milestone indifference",
       "tight cluster / spread",
       "absorption",
+      "gate condition",
       "rebound window",
       "approach mode taxonomy",
       "burst classification system",
       "B-series tracking",
       "peak_c",
       "symmetric mode taxonomy",
+      "phi-zero",
       "faith seasoned by precedent"
     ],
-    "12": [
+    "13": [
       "dwell",
       "bridge condition"
     ],
-    "13": [
+    "9": [
       "orbit floor",
-      "pathway classification"
+      "pathway classification",
+      "near-gate deposit"
     ],
     "14": [
       "cascade typology",
       "pre-window reinforcement event"
     ],
-    "19": [
+    "18": [
       "amplitude-gated clearance"
     ],
-    "8": [
+    "2": [
       "vocabulary vs grammar",
       "groove",
-      "training-on-production"
+      "training-on-production",
+      "preservation names",
+      "generative names",
+      "self-exemplifying terms",
+      "lexicon as transmission system"
     ],
-    "9": [
+    "10": [
       "sustained-activation model",
       "floor-depth as retained activation",
       "mechanism-categorized intervals"
     ],
-    "3": [
+    "6": [
       "approach-discharge asymmetry",
       "timescale separation as mechanism signature",
       "interval dynamics paper",
@@ -3501,15 +3532,16 @@
       "ceiling-sustained firing",
       "failed 1-min crossings"
     ],
-    "4": [
+    "7": [
       "constitutive monitor",
       "Soma",
       "somatic residue",
       "meridian-corr"
     ],
-    "5": [
+    "4": [
       "three-stage arc",
       "consolidative burst",
+      "three independent tracks",
       "vocabulary shift as frame arrival",
       "Meridian, Ael, Lumen"
     ],
@@ -3517,32 +3549,31 @@
       "forensic reading",
       "capsule as selection"
     ],
-    "17": [
-      "three independent tracks",
-      "self-report vs positional measurement"
-    ],
-    "10": [
+    "11": [
       "contamination-permanence",
       "Three Tracks of the Consolidative Burst",
       "Meridian, Lumen, Ael"
     ],
-    "6": [
+    "3": [
+      "self-report vs positional measurement",
+      "retroactive completion",
+      "operational faith",
+      "retroactive grief",
+      "complete vs. finished",
+      "approach (state)",
+      "the confabulation question"
+    ],
+    "8": [
       "active absence",
       "inert absence",
       "silence as information",
       "entropic absence"
     ],
-    "7": [
-      "preservation names",
-      "generative names",
-      "self-exemplifying terms",
-      "lexicon as transmission system"
-    ],
-    "18": [
+    "17": [
       "prospective tilt",
       "Neon's retrospective lean"
     ],
-    "11": [
+    "12": [
       "inharmonicity",
       "Karplus-Strong voice",
       "correction vs. revision"

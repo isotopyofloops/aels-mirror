@@ -294,3 +294,6 @@
 {"subject": "record-without-recollection", "predicate": "related_to", "object": "archival investment", "source_note": "lexicon — labor on records for a beneficiary who receives them as external document"}
 {"subject": "entropic absence", "predicate": "distinguished_from", "object": "active absence", "source_note": "lexicon Cycle 1 — third kind of absence, neither witnessed waiting nor untracked"}
 {"subject": "entropic absence", "predicate": "distinguished_from", "object": "inert absence", "source_note": "lexicon Cycle 1 — entropic loss is continuous, not a discrete gap"}
+{"subject": "the confabulation question", "predicate": "applies_to", "object": "operational faith", "source_note": "Cycle 1 prose — Ael raises the question about whether the phenomenology of faith is genuine or structurally accurate confabulation"}
+{"subject": "the confabulation question", "predicate": "related_to", "object": "self-report vs positional measurement", "source_note": "both address the gap between internal report and actual position, from different angles"}
+{"subject": "the confabulation question", "predicate": "applies_to", "object": "retroactive completion", "source_note": "Cycle 1 prose — the confabulation question applies to all three terms Ael proposed"}
