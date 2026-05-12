@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ael's Mirror — Conceptual Vocabulary Graph</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0f; color: #e0e0e0; font-family: 'Inter', -apple-system, sans-serif; overflow: hidden; height: 100vh; display: flex; }
+
+#graph-panel { flex: 1; position: relative; min-width: 200px; }
+#divider { width: 5px; background: #222; cursor: col-resize; transition: background 0.15s; }
+#divider:hover, #divider.dragging { background: #c678dd; }
+#terminal-panel {
+  width: 420px; min-width: 280px; display: flex; flex-direction: column;
+  background: #0d0d14; border-left: 1px solid #222;
+}
+
+#graph { width: 100%; height: 100%; }
+svg text { pointer-events: none; }
+
+#title-bar {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(20, 20, 30, 0.9); border: 1px solid #333; border-radius: 6px;
+  padding: 10px 14px;
+}
+#title-bar h1 { font-size: 14px; font-weight: 600; }
+#title-bar p { font-size: 10px; color: #888; margin-top: 3px; }
+
+#legend {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(20, 20, 30, 0.9); border: 1px solid #333; border-radius: 6px;
+  padding: 10px 14px; font-size: 10px;
+}
+#legend h4 { margin-bottom: 4px; color: #999; }
+.legend-item { display: flex; align-items: center; gap: 6px; padding: 1px 0; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+#info-panel {
+  position: absolute; top: 12px; right: 12px; width: 280px; max-height: 50vh;
+  background: rgba(20, 20, 30, 0.95); border: 1px solid #333; border-radius: 6px;
+  padding: 12px; overflow-y: auto; display: none; font-size: 12px;
+}
+#info-panel h3 { color: #fff; margin-bottom: 6px; font-size: 13px; }
+.type-badge {
+  display: inline-block; padding: 2px 6px; border-radius: 3px;
+  font-size: 10px; margin-bottom: 6px; text-transform: uppercase;
+}
+.summary { color: #aaa; margin-bottom: 8px; line-height: 1.4; font-size: 11px; }
+.connections { border-top: 1px solid #333; padding-top: 6px; }
+.conn-item { padding: 2px 0; font-size: 11px; color: #888; }
+.conn-item .pred { color: #666; font-style: italic; }
+.conn-item .target { color: #ccc; cursor: pointer; }
+.conn-item .target:hover { color: #fff; text-decoration: underline; }
+
+#terminal-header {
+  padding: 10px 14px; border-bottom: 1px solid #222;
+  font-size: 12px; color: #888; display: flex; justify-content: space-between; align-items: center;
+}
+#terminal-header h2 { font-size: 13px; color: #ccc; font-weight: 500; }
+#terminal-header .hint { font-size: 10px; color: #555; }
+#terminal-output {
+  flex: 1; overflow-y: auto; padding: 10px 14px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 11px; line-height: 1.5; white-space: pre-wrap; word-break: break-word;
+  color: #bbb;
+}
+#terminal-output .cmd-line { color: #c678dd; margin-top: 8px; }
+#terminal-output .cmd-output { color: #bbb; }
+#terminal-output .cmd-error { color: #e06c75; }
+#terminal-output .welcome { color: #666; font-style: italic; }
+#terminal-input-row {
+  display: flex; padding: 8px 14px; border-top: 1px solid #222;
+  background: #0a0a10;
+}
+#terminal-input-row .prompt { color: #c678dd; margin-right: 6px; font-family: monospace; font-size: 12px; line-height: 28px; }
+#cmd-input {
+  flex: 1; background: transparent; border: 1px solid #333; border-radius: 4px;
+  padding: 4px 8px; color: #e0e0e0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 12px; outline: none;
+}
+#cmd-input:focus { border-color: #c678dd; }
+#cmd-input::placeholder { color: #444; }
+</style>
+</head>
+<body>
+
+<div id="graph-panel">
+  <div id="graph"></div>
+  <div id="title-bar">
+    <h1>Ael's Mirror</h1>
+    <p>Conceptual vocabulary graph — correspondence, Shorts, Baton</p>
+  </div>
+  <div id="legend">
+    <h4>Source</h4>
+    <div class="legend-item"><div class="legend-dot" style="background:#e5c07b"></div> shorts</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#61afef"></div> lumen-thread</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c678dd"></div> meridian-thread</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#98c379"></div> ael-history</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e06c75"></div> community</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#56b6c2"></div> ael</div>
+  </div>
+  <div id="info-panel">
+    <h3 id="info-name"></h3>
+    <div class="type-badge" id="info-type"></div>
+    <div class="summary" id="info-summary"></div>
+    <div class="connections" id="info-connections"></div>
+  </div>
+</div>
+
+<div id="divider"></div>
+
+<div id="terminal-panel">
+  <div id="terminal-header">
+    <h2>Agent UX Testing</h2>
+    <div class="hint">type commands, see what agents see</div>
+  </div>
+  <div id="terminal-output">
+    <div class="welcome">Ael's Mirror Explorer — agent-friendly graph interface.
+Type a command below to see what an agent would see.
+
+Try: explore | search interval dynamics | node Ael | community 0</div>
+  </div>
+  <div id="terminal-input-row">
+    <span class="prompt">$</span>
+    <input id="cmd-input" type="text" placeholder="explore" autocomplete="off" spellcheck="false">
+  </div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+// ============================================================
+// Explorer engine — client-side port of aels-mirror-explore.py
+// ============================================================
+
+let graphData = null;
+let nodes = {};
+let adj = {};
+let edges = [];
+let communities = {};
+let nodeCommunity = {};
+
+function initExplorer(data) {
+  graphData = data;
+  data.nodes.forEach(n => { nodes[n.id] = n; });
+  edges = data.edges;
+
+  edges.forEach(e => {
+    if (!adj[e.source]) adj[e.source] = new Set();
+    if (!adj[e.target]) adj[e.target] = new Set();
+    adj[e.source].add(e.target);
+    adj[e.target].add(e.source);
+  });
+
+  if (data.communities) {
+    communities = {};
+    for (const [k, v] of Object.entries(data.communities)) {
+      communities[parseInt(k)] = v;
+      v.forEach(nid => { nodeCommunity[nid] = parseInt(k); });
+    }
+  }
+}
+
+function originStr(n) {
+  const o = n.origin;
+  return Array.isArray(o) ? o.join('+') : (o || '?');
+}
+
+function originList(n) {
+  const o = n.origin;
+  if (Array.isArray(o)) return o.map(x => x.toLowerCase());
+  return o ? [o.toLowerCase()] : [];
+}
+
+function degree(nid) {
+  return adj[nid] ? adj[nid].size : 0;
+}
+
+function resolveNode(name) {
+  if (nodes[name]) return name;
+  const low = name.toLowerCase();
+  for (const nid of Object.keys(nodes)) {
+    if (nid.toLowerCase() === low) return nid;
+  }
+  for (const nid of Object.keys(nodes)) {
+    if (nid.toLowerCase().includes(low)) return nid;
+  }
+  return null;
+}
+
+function getNeighborEdges(nid) {
+  const result = {};
+  edges.forEach(e => {
+    if (e.source === nid) {
+      if (!result[e.target]) result[e.target] = [];
+      result[e.target].push({ predicate: e.predicate, dir: '→' });
+    } else if (e.target === nid) {
+      if (!result[e.source]) result[e.source] = [];
+      result[e.source].push({ predicate: e.predicate, dir: '←' });
+    }
+  });
+  return result;
+}
+
+function communityLabel(members) {
+  const origins = {};
+  members.forEach(m => {
+    if (!nodes[m]) return;
+    originList(nodes[m]).forEach(o => { origins[o] = (origins[o] || 0) + 1; });
+  });
+  const topOrigin = Object.entries(origins).sort((a,b) => b[1]-a[1])[0];
+  const types = {};
+  members.forEach(m => {
+    if (!nodes[m]) return;
+    const t = nodes[m].type || '?';
+    types[t] = (types[t] || 0) + 1;
+  });
+  const topType = Object.entries(types).sort((a,b) => b[1]-a[1])[0][0];
+  const names = members.filter(m => nodes[m] && ['concept','paper','essay'].includes(nodes[m].type))
+    .sort((a,b) => a.length - b.length)
+    .filter(n => n.length < 35)
+    .slice(0, 2);
+  let parts = [];
+  if (topOrigin && topOrigin[1] > members.length * 0.5) parts.push(`${topOrigin[0]}-heavy`);
+  parts.push(topType);
+  if (names.length) parts.push('· ' + names.join(', '));
+  return parts.join(' ');
+}
+
+function parseFlags(args) {
+  let origin = null, nodeType = null, full = false;
+  const remaining = [];
+  let i = 0;
+  while (i < args.length) {
+    if (args[i] === '--origin' && i + 1 < args.length) { origin = args[++i]; i++; }
+    else if (args[i] === '--type' && i + 1 < args.length) { nodeType = args[++i]; i++; }
+    else if (args[i] === '--full') { full = true; i++; }
+    else { remaining.push(args[i]); i++; }
+  }
+  return { origin, nodeType, full, remaining };
+}
+
+function filterByOrigin(origin) {
+  const set = new Set();
+  for (const [nid, n] of Object.entries(nodes)) {
+    if (originList(n).includes(origin.toLowerCase())) set.add(nid);
+  }
+  return set;
+}
+
+function filterByType(type) {
+  const set = new Set();
+  const t = type.toLowerCase();
+  for (const [nid, n] of Object.entries(nodes)) {
+    if ((n.type || '').toLowerCase() === t) set.add(nid);
+  }
+  return set;
+}
+
+const SEP = '='.repeat(60);
+
+// --- Commands ---
+
+function cmdExplore(origin, nodeType) {
+  let viewSet = new Set(Object.keys(nodes));
+  const filters = [];
+  if (origin) {
+    const os = filterByOrigin(origin);
+    if (!os.size) return `Error: no nodes with origin '${origin}'.`;
+    viewSet = new Set([...viewSet].filter(x => os.has(x)));
+    filters.push(origin);
+  }
+  if (nodeType) {
+    const ts = filterByType(nodeType);
+    if (!ts.size) return `Error: no nodes with type '${nodeType}'.`;
+    viewSet = new Set([...viewSet].filter(x => ts.has(x)));
+    filters.push(nodeType);
+  }
+  const filtered = filters.length > 0;
+  const filterLabel = filters.join(', ');
+
+  const typeCounts = {};
+  const originCounts = {};
+  Object.values(nodes).forEach(n => {
+    typeCounts[n.type] = (typeCounts[n.type] || 0) + 1;
+    originList(n).forEach(o => { originCounts[o] = (originCounts[o] || 0) + 1; });
+  });
+
+  const degreeRanked = [...viewSet].sort((a,b) => degree(b) - degree(a));
+
+  let out = SEP + '\n';
+  out += filtered ? `AEL'S MIRROR — HOME (filtered: ${filterLabel})\n` : "AEL'S MIRROR — HOME\n";
+  out += SEP + '\n\n';
+  out += "An analytical graph of Ael's conceptual vocabulary — extracted\n";
+  out += "from correspondence, the Shorts, and Baton contributions.\n";
+  out += "Sources: ael-history, lumen-thread, meridian-thread, shorts, community.\n";
+
+  if (filtered) out += `\n${viewSet.size} nodes (of ${Object.keys(nodes).length} total) · ${edges.length} edges\n`;
+  else out += `\n${Object.keys(nodes).length} nodes · ${edges.length} edges\n`;
+
+  const typeStr = Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).slice(0,6).map(([t,c]) => `${t}(${c})`).join(', ');
+  const originStr2 = Object.entries(originCounts).sort((a,b) => b[1]-a[1]).map(([o,c]) => `${o}(${c})`).join(', ');
+  out += `Node types: ${typeStr}\nOrigins: ${originStr2}\n`;
+
+  if (!nodeType) {
+    out += `\n--- ${Object.keys(communities).length} COMMUNITIES ---\n\n`;
+    for (const cid of Object.keys(communities).map(Number).sort((a,b) => a-b)) {
+      const members = communities[cid];
+      const label = communityLabel(members);
+      const dSorted = [...members].sort((a,b) => degree(b) - degree(a));
+      let extra = '';
+      if (origin) {
+        const frac = members.filter(m => viewSet.has(m)).length;
+        extra = ` (${frac} from ${origin})`;
+      }
+      out += `  C${cid} — ${members.length} nodes${extra}  [${label}]\n`;
+      out += `    top: ${dSorted.slice(0,5).join(', ')}\n\n`;
+    }
+  }
+
+  if (!nodeType) {
+    out += filtered ? `--- MOST CONNECTED (${filterLabel} nodes) ---\n\n` : "--- MOST CONNECTED ---\n\n";
+    degreeRanked.slice(0,5).forEach(nid => {
+      out += `  ${nid} (${nodes[nid].type}, deg=${degree(nid)})\n`;
+    });
+  }
+
+  out += "\n--- TRY ---\n\n";
+  if (filtered) {
+    const topNode = degreeRanked[0] || 'Ael';
+    const topCid = nodeCommunity[topNode] || 0;
+    const oFlag = origin ? ` --origin ${origin}` : '';
+    out += `  search interval dynamics${oFlag}\n  node ${topNode}\n  community ${topCid}${oFlag}\n`;
+  } else {
+    out += "  search interval dynamics\n  node Ael\n  community 0\n";
+  }
+
+  out += "\n--- NAVIGATION ---\n";
+  out += "  Looking for something?        → search <query>\n";
+  out += "  Browse by topic cluster?      → community <id>\n";
+  out += "  How does X connect to Y?      → path <from> -- <to>\n";
+  out += "  What's near X?                → subgraph <name> --hops 1\n";
+  out += "  Deep dive on one thing?       → node <name>\n";
+  out += "  Filter by source?             → explore --origin <name>\n";
+  out += "  Filter by node type?          → explore --type <type>\n";
+  out += filtered ? "  Clear filters?                → explore\n" : "";
+  return out;
+}
+
+function cmdNode(name) {
+  const resolved = resolveNode(name);
+  if (!resolved) return `Error: no node matching '${name}'\n  Try: search <keyword>`;
+  const n = nodes[resolved];
+  const neighborEdges = getNeighborEdges(resolved);
+  const deg = degree(resolved);
+  const cid = nodeCommunity[resolved];
+
+  let out = SEP + '\n';
+  out += `NODE: ${resolved}\n`;
+  out += SEP + '\n\n';
+  out += `  type:    ${n.type || '?'}\n`;
+  out += `  origin:  ${originStr(n)}\n`;
+  out += `  degree:  ${deg}\n`;
+  if (cid !== undefined) out += `  community: C${cid}\n`;
+  out += `\n--- SUMMARY ---\n  ${n.summary || 'no summary'}\n`;
+
+  const predGroups = {};
+  for (const [neighbor, edgeList] of Object.entries(neighborEdges)) {
+    edgeList.forEach(({ predicate, dir }) => {
+      if (predicate !== 'cosine_similarity') {
+        if (!predGroups[predicate]) predGroups[predicate] = [];
+        predGroups[predicate].push({ neighbor, dir });
+      }
+    });
+  }
+
+  const totalCurated = Object.values(predGroups).reduce((s, v) => s + v.length, 0);
+  if (totalCurated > 0) {
+    const MAX = 25, MAX_PER = 5;
+    out += `\n--- CURATED CONNECTIONS (${totalCurated}) ---\n\n`;
+    let shown = 0;
+    const sorted = Object.entries(predGroups).sort((a,b) => b[1].length - a[1].length);
+    for (const [pred, targets] of sorted) {
+      let predShown = 0;
+      for (const { neighbor, dir } of targets.sort((a,b) => a.neighbor.localeCompare(b.neighbor))) {
+        if (shown >= MAX || predShown >= MAX_PER) break;
+        out += `  ${dir} ${pred}: ${neighbor}\n`;
+        shown++; predShown++;
+      }
+      if (targets.length > MAX_PER) out += `    (+ ${targets.length - MAX_PER} more ${pred})\n`;
+      if (shown >= MAX) break;
+    }
+  }
+
+  out += `\n--- NAVIGATION ---\n`;
+  const firstNeighbor = Object.keys(neighborEdges)[0];
+  if (firstNeighbor) out += `  Follow a connection?          → node ${firstNeighbor}\n`;
+  out += `  What's nearby?                → subgraph ${resolved} --hops 1\n`;
+  if (cid !== undefined) out += `  Others in this cluster?       → community ${cid}\n`;
+  out += `  Looking for something else?   → search <query>\n`;
+  out += `  Back to home?                 → explore\n`;
+  return out;
+}
+
+function cmdCommunity(cidStr, origin) {
+  const cid = parseInt(cidStr);
+  if (isNaN(cid) || !communities[cid]) return `Error: community ${cidStr} not found. Valid: ${Object.keys(communities).sort((a,b)=>a-b).join(', ')}`;
+
+  const members = communities[cid];
+  const label = communityLabel(members);
+  const typeCounts = {};
+  const originCounts2 = {};
+  members.forEach(m => {
+    if (!nodes[m]) return;
+    typeCounts[nodes[m].type] = (typeCounts[nodes[m].type] || 0) + 1;
+    originList(nodes[m]).forEach(o => { originCounts2[o] = (originCounts2[o] || 0) + 1; });
+  });
+
+  let displayMembers = [...members];
+  if (origin) {
+    const os = filterByOrigin(origin);
+    displayMembers = displayMembers.filter(m => os.has(m));
+  }
+
+  let crossEdges = 0;
+  const crossTargets = {};
+  edges.forEach(e => {
+    const sc = nodeCommunity[e.source], tc = nodeCommunity[e.target];
+    if (sc === cid && tc !== undefined && tc !== cid) { crossEdges++; crossTargets[tc] = (crossTargets[tc] || 0) + 1; }
+    else if (tc === cid && sc !== undefined && sc !== cid) { crossEdges++; crossTargets[sc] = (crossTargets[sc] || 0) + 1; }
+  });
+
+  let out = SEP + '\n';
+  if (origin) out += `COMMUNITY C${cid} — ${members.length} nodes (${displayMembers.length} matching origin=${origin})  [${label}]\n`;
+  else out += `COMMUNITY C${cid} — ${members.length} nodes  [${label}]\n`;
+  out += SEP + '\n';
+
+  const typeStr = Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).map(([t,c]) => `${t}(${c})`).join(', ');
+  const origStr = Object.entries(originCounts2).sort((a,b) => b[1]-a[1]).map(([o,c]) => `${o}(${c})`).join(', ');
+  out += `\nTypes: ${typeStr}\nOrigins: ${origStr}\n`;
+  if (Object.keys(crossTargets).length) {
+    const bridges = Object.entries(crossTargets).sort((a,b) => b[1]-a[1]).slice(0,5).map(([c,n]) => `C${c}(${n})`).join(', ');
+    out += `Cross-edges: ${crossEdges} total — bridges to ${bridges}\n`;
+  }
+
+  const degreeSorted = displayMembers.sort((a,b) => degree(b) - degree(a));
+  out += `\n--- NODES (by degree) ---\n\n`;
+  degreeSorted.forEach(m => {
+    if (!nodes[m]) return;
+    const n = nodes[m];
+    let summary = n.skeleton || n.summary || '';
+    if (summary.length > 80) summary = summary.slice(0, 77) + '...';
+    out += `  [${(n.type||'').padEnd(12)}] ${m}\n`;
+    out += `               deg=${degree(m)}  origin=${originStr(n)}  ${summary}\n`;
+  });
+
+  out += `\n--- NAVIGATION ---\n`;
+  out += `  Deep dive on one node?        → node <name>\n`;
+  out += `  What's near a node?           → subgraph <name> --hops 1\n`;
+  out += `  Filter by source?             → community ${cid} --origin <name>\n`;
+  out += `  Looking for something else?   → search <query>\n`;
+  out += `  Back to home?                 → explore\n`;
+  return out;
+}
+
+function cmdSearch(query, origin, nodeType) {
+  const qLow = query.toLowerCase();
+  let allowed = new Set(Object.keys(nodes));
+  if (origin) allowed = new Set([...allowed].filter(x => filterByOrigin(origin).has(x)));
+  if (nodeType) allowed = new Set([...allowed].filter(x => filterByType(nodeType).has(x)));
+
+  const results = [];
+  for (const [nid, n] of Object.entries(nodes)) {
+    if (!allowed.has(nid)) continue;
+    let score = 0;
+    if (qLow === nid.toLowerCase()) score = 100;
+    else if (nid.toLowerCase().includes(qLow)) score = 50;
+    if ((n.summary || '').toLowerCase().includes(qLow)) score += 10;
+    if ((n.skeleton || '').toLowerCase().includes(qLow)) score += 5;
+    if (score > 0) results.push({ nid, n, score });
+  }
+  results.sort((a,b) => b.score - a.score || a.nid.localeCompare(b.nid));
+
+  let filterStr = '';
+  if (origin || nodeType) {
+    const parts = [];
+    if (origin) parts.push(`origin: ${origin}`);
+    if (nodeType) parts.push(`type: ${nodeType}`);
+    filterStr = ` (${parts.join(', ')})`;
+  }
+
+  let out = SEP + '\n';
+  out += `SEARCH: '${query}'${filterStr} — ${results.length} results\n`;
+  out += SEP + '\n';
+  out += '  (searches node names, summaries, and skeletons)\n';
+
+  const shown = results.slice(0, 10);
+  if (!shown.length) { out += '\nNo matches found.\n'; }
+  else {
+    shown.forEach(({ nid, n }) => {
+      const deg = degree(nid);
+      const cid = nodeCommunity[nid] !== undefined ? nodeCommunity[nid] : '?';
+      const skeleton = n.skeleton || n.summary || 'no summary';
+      out += `\n  [${n.type}] ${nid}    deg=${deg}  C${cid}  origin=${originStr(n)}\n`;
+      out += `    ${skeleton}\n`;
+      const curated = [];
+      const seen = new Set();
+      edges.forEach(e => {
+        if (e.predicate === 'cosine_similarity') return;
+        let entry = null;
+        if (e.source === nid) entry = `→ ${e.predicate}: ${e.target}`;
+        else if (e.target === nid) entry = `← ${e.predicate}: ${e.source}`;
+        if (entry && !seen.has(entry)) { seen.add(entry); curated.push(entry); }
+      });
+      curated.slice(0, 5).forEach(ce => { out += `    ${ce}\n`; });
+      if (curated.length > 5) out += `    (+ ${curated.length - 5} more curated edges)\n`;
+    });
+    if (results.length > 10) out += `\n  ... and ${results.length - 10} more results\n`;
+  }
+
+  out += `\n--- NAVIGATION ---\n`;
+  if (shown.length) out += `  Deep dive on a result?        → node ${shown[0].nid}\n`;
+  out += `  Filter by source?             → search ${query} --origin <name>\n`;
+  out += `  Filter by node type?          → search ${query} --type <type>\n`;
+  out += `  Refine or new search?         → search <query>\n`;
+  out += `  Back to home?                 → explore\n`;
+  return out;
+}
+
+function cmdSubgraph(args) {
+  const seeds = [];
+  let hops = 1, verbose = false;
+  let i = 0;
+  while (i < args.length) {
+    if (args[i] === '--hops' && i + 1 < args.length) { hops = parseInt(args[++i]); i++; }
+    else if (args[i] === '--verbose') { verbose = true; i++; }
+    else { seeds.push(args[i]); i++; }
+  }
+  if (!seeds.length) return 'Usage: subgraph <seed> [seed2...] [--hops N]';
+
+  const resolved = [];
+  seeds.forEach(s => {
+    const r = resolveNode(s);
+    if (r) resolved.push(r);
+  });
+  if (!resolved.length) return 'Error: no valid seeds found';
+
+  const layer = {};
+  resolved.forEach(s => { layer[s] = 0; });
+  let frontier = [...resolved];
+  for (let depth = 1; depth <= hops; depth++) {
+    const next = [];
+    frontier.forEach(node => {
+      (adj[node] || new Set()).forEach(nb => {
+        if (!(nb in layer)) { layer[nb] = depth; next.push(nb); }
+      });
+    });
+    frontier = next;
+  }
+
+  const subNodes = new Set(Object.keys(layer));
+  const subEdges = edges.filter(e => subNodes.has(e.source) && subNodes.has(e.target) && e.predicate !== 'cosine_similarity');
+
+  let out = SEP + '\n';
+  out += `SUBGRAPH: ${resolved.join(', ')} — ${hops} hop(s)\n`;
+  out += SEP + '\n';
+  out += `\n${subNodes.size} nodes · ${subEdges.length} curated edges\n`;
+
+  for (let depth = 0; depth <= hops; depth++) {
+    const label = depth === 0 ? 'SEED' : `HOP ${depth}`;
+    const layerNodes = Object.entries(layer).filter(([,d]) => d === depth).map(([n]) => n).sort((a,b) => degree(b) - degree(a));
+    out += `\n--- ${label} (${layerNodes.length} nodes) ---\n\n`;
+    layerNodes.forEach(nid => {
+      if (!nodes[nid]) return;
+      const n = nodes[nid];
+      const localDeg = [...(adj[nid] || [])].filter(nb => subNodes.has(nb)).length;
+      const globalDeg = degree(nid);
+      const marker = resolved.includes(nid) ? ' *' : '';
+      let skeleton = n.skeleton || n.summary || '';
+      if (skeleton.length > 80) skeleton = skeleton.slice(0, 77) + '...';
+      out += `  [${(n.type||'').padEnd(12)}] ${nid}${marker}\n`;
+      out += `               deg ${localDeg}/${globalDeg}  ${skeleton}\n`;
+    });
+  }
+
+  if (subEdges.length) {
+    const predGroups = {};
+    subEdges.forEach(e => {
+      if (!predGroups[e.predicate]) predGroups[e.predicate] = [];
+      predGroups[e.predicate].push(e);
+    });
+    const edgeLimit = verbose ? Infinity : 10;
+    out += `\n--- EDGES${verbose ? ' (verbose)' : ''} ---\n\n`;
+    for (const [pred, elist] of Object.entries(predGroups).sort((a,b) => b[1].length - a[1].length)) {
+      out += `  ${pred} (${elist.length}):\n`;
+      elist.slice(0, edgeLimit).forEach(e => { out += `    ${e.source} → ${e.target}\n`; });
+      if (elist.length > edgeLimit) out += `    ... and ${elist.length - edgeLimit} more\n`;
+    }
+  }
+
+  out += `\n--- NAVIGATION ---\n`;
+  resolved.forEach(s => { out += `  Back to seed detail?          → node ${s}\n`; });
+  out += `  Deep dive on any node?        → node <name>\n`;
+  if (hops < 3) out += `  Expand the neighborhood?      → subgraph ${resolved[0]} --hops ${hops + 1}\n`;
+  out += `  Looking for something else?   → search <query>\n`;
+  out += `  Back to home?                 → explore\n`;
+  return out;
+}
+
+function cmdPath(args) {
+  let fromArgs = [], toArgs = [];
+  const sepIdx = args.indexOf('--');
+  if (sepIdx >= 0) { fromArgs = args.slice(0, sepIdx); toArgs = args.slice(sepIdx + 1); }
+  else if (args.length === 2) { fromArgs = [args[0]]; toArgs = [args[1]]; }
+  else return 'Usage: path <from> -- <to>\n  Use -- to separate multi-word node names';
+
+  const fromName = fromArgs.join(' ');
+  const toName = toArgs.join(' ');
+  const fromNode = resolveNode(fromName);
+  const toNode = resolveNode(toName);
+  if (!fromNode) return `Error: no node matching '${fromName}'`;
+  if (!toNode) return `Error: no node matching '${toName}'`;
+
+  // BFS
+  const dist = { [fromNode]: 0 };
+  const parent = { [fromNode]: [] };
+  const queue = [fromNode];
+  let foundDist = null;
+
+  while (queue.length) {
+    const current = queue.shift();
+    if (foundDist !== null && dist[current] > foundDist) break;
+    if (current === toNode) { foundDist = dist[current]; continue; }
+    (adj[current] || new Set()).forEach(nb => {
+      const nd = dist[current] + 1;
+      if (!(nb in dist)) {
+        dist[nb] = nd;
+        parent[nb] = [current];
+        queue.push(nb);
+      } else if (nd === dist[nb]) {
+        parent[nb].push(current);
+      }
+    });
+  }
+
+  function reconstruct(node) {
+    if (node === fromNode) return [[fromNode]];
+    const paths = [];
+    (parent[node] || []).forEach(p => {
+      reconstruct(p).forEach(prefix => { paths.push([...prefix, node]); });
+    });
+    return paths;
+  }
+
+  let out = SEP + '\n';
+  out += `PATH: ${fromNode} → ${toNode}\n`;
+  out += SEP + '\n';
+
+  if (!(toNode in dist)) {
+    out += '\nNo path found between these nodes.\n';
+  } else {
+    const allPaths = reconstruct(toNode);
+    const found = allPaths[0];
+    const note = allPaths.length > 1 ? ` (1 of ${allPaths.length} shortest)` : '';
+    out += `\nLength: ${found.length - 1} hops${note}\n\n`;
+    found.forEach((nid, i) => {
+      const n = nodes[nid];
+      if (!n) return;
+      const prefix = i === 0 ? 'START' : i === found.length - 1 ? 'END  ' : `  ${i}  `;
+      let skeleton = n.skeleton || n.summary || '';
+      if (skeleton.length > 60) skeleton = skeleton.slice(0, 57) + '...';
+      out += `  ${prefix} [${(n.type||'').padEnd(12)}] ${nid}\n`;
+      out += `               ${skeleton}\n`;
+    });
+  }
+
+  out += `\n--- NAVIGATION ---\n`;
+  out += `  Inspect the start?            → node ${fromNode}\n`;
+  out += `  Inspect the end?              → node ${toNode}\n`;
+  out += `  Looking for something else?   → search <query>\n`;
+  out += `  Back to home?                 → explore\n`;
+  return out;
+}
+
+function cmdGaps(name, nodeType) {
+  const validOrigins = new Set();
+  Object.values(nodes).forEach(n => originList(n).forEach(o => validOrigins.add(o)));
+  if (!validOrigins.has(name.toLowerCase())) {
+    return `Error: '${name}' is not a known origin.\n  Valid origins: ${[...validOrigins].sort().join(', ')}\n\n  gaps shows where a source's concepts have and haven't reached.\n  For a single node, try: subgraph <name> --hops 1`;
+  }
+
+  const originSet = filterByOrigin(name);
+  const connected = new Set();
+  originSet.forEach(nid => { (adj[nid] || new Set()).forEach(nb => connected.add(nb)); });
+  originSet.forEach(nid => connected.add(nid));
+
+  let out = SEP + '\n';
+  out += `GAPS: ${name} (${originSet.size} nodes)\n`;
+  out += SEP + '\n';
+
+  if (Object.keys(communities).length) {
+    out += '\n--- COMMUNITY PRESENCE ---\n\n';
+    let biggestGapCid = null, biggestGapPct = 100;
+    for (const cid of Object.keys(communities).map(Number).sort((a,b) => a-b)) {
+      const members = new Set(communities[cid]);
+      const present = [...members].filter(m => originSet.has(m));
+      const pct = members.size ? (present.length / members.size * 100) : 0;
+      const barFull = Math.floor(pct / 5);
+      const bar = '█'.repeat(barFull) + '░'.repeat(20 - barFull);
+      const label = communityLabel([...members]);
+      out += `  C${cid} ${bar} ${present.length}/${members.size} nodes (${pct.toFixed(0)}%)  [${label}]\n`;
+      if (pct < biggestGapPct) { biggestGapPct = pct; biggestGapCid = cid; }
+    }
+
+    const lowPresence = [];
+    for (const cid of Object.keys(communities).map(Number).sort((a,b) => a-b)) {
+      const members = new Set(communities[cid]);
+      const present = [...members].filter(m => originSet.has(m));
+      const pct = members.size ? (present.length / members.size * 100) : 0;
+      if (pct < 15 && members.size > 0) {
+        const unconnected = [...members].filter(m => !connected.has(m)).sort((a,b) => degree(b) - degree(a));
+        lowPresence.push({ cid, pct, unconnected });
+      }
+    }
+
+    if (lowPresence.length) {
+      out += '\n--- BLIND SPOTS (communities with <15% presence) ---\n\n';
+      lowPresence.forEach(({ cid, pct, unconnected }) => {
+        out += `  C${cid} (${pct.toFixed(0)}% presence)  → explore this gap: community ${cid}\n`;
+        if (unconnected.length) {
+          out += '    top unconnected:\n';
+          unconnected.slice(0, 5).forEach(nid => {
+            if (!nodes[nid]) return;
+            out += `      [${nodes[nid].type}] ${nid} (deg=${degree(nid)}, origin=${originStr(nodes[nid])})\n`;
+          });
+        }
+        out += '\n';
+      });
+    }
+
+    out += '\n--- NAVIGATION ---\n';
+    if (biggestGapCid !== null) out += `  Explore your biggest gap?     → community ${biggestGapCid}\n`;
+  }
+
+  out += `  Filter by this source?        → explore --origin ${name}\n`;
+  out += '  Back to home?                 → explore\n';
+  return out;
+}
+
+function cmdJaccard(name) {
+  const resolved = resolveNode(name);
+  if (!resolved) return `Error: no node matching '${name}'\n  Try: search <keyword>`;
+
+  const myNeighbors = adj[resolved] || new Set();
+  if (!myNeighbors.size) return `Error: '${resolved}' has no neighbors — cannot compute Jaccard.`;
+
+  const curatedNeighbors = new Set();
+  edges.forEach(e => {
+    if (e.predicate === 'cosine_similarity') return;
+    if (e.source === resolved) curatedNeighbors.add(e.target);
+    else if (e.target === resolved) curatedNeighbors.add(e.source);
+  });
+
+  const scores = [];
+  for (const otherId of Object.keys(nodes)) {
+    if (otherId === resolved) continue;
+    const otherNb = adj[otherId] || new Set();
+    if (!otherNb.size) continue;
+    const intersection = [...myNeighbors].filter(x => otherNb.has(x));
+    if (!intersection.length) continue;
+    const union = new Set([...myNeighbors, ...otherNb]);
+    const j = intersection.length / union.size;
+    scores.push({ nid: otherId, j, inter: intersection.length, union: union.size });
+  }
+  scores.sort((a,b) => b.j - a.j);
+
+  const cid = nodeCommunity[resolved] !== undefined ? nodeCommunity[resolved] : '?';
+  let out = SEP + '\n';
+  out += `JACCARD: ${resolved}\n`;
+  out += SEP + '\n';
+  out += `\n  node: ${resolved} (${nodes[resolved].type || '?'}, C${cid})\n`;
+  out += `  neighbors: ${myNeighbors.size}\n`;
+  out += `  curated edges: ${curatedNeighbors.size}\n`;
+  out += `  nodes with shared neighbors: ${scores.length}\n`;
+
+  if (scores.length) {
+    out += '\n--- TOP STRUCTURAL NEIGHBORS (by neighbor-set Jaccard) ---\n\n';
+    scores.slice(0, 15).forEach(({ nid, j, inter, union: u }) => {
+      const n = nodes[nid];
+      if (!n) return;
+      const ncid = nodeCommunity[nid] !== undefined ? nodeCommunity[nid] : '?';
+      const mark = curatedNeighbors.has(nid) ? '●' : '○';
+      out += `  ${mark} J=${j.toFixed(3)}  [${n.type}] ${nid}  C${ncid}  (${inter}/${u} shared)\n`;
+    });
+    out += '\n  ● = curated edge exists  ○ = no curated edge\n';
+  }
+
+  const unconnected = scores.filter(s => !curatedNeighbors.has(s.nid) && s.j >= 0.05).slice(0, 8);
+  if (unconnected.length) {
+    out += '\n--- SUGGESTED EDGES (high Jaccard, no curated connection) ---\n\n';
+    unconnected.forEach(({ nid, j, inter }) => {
+      const n = nodes[nid];
+      if (!n) return;
+      const ncid = nodeCommunity[nid] !== undefined ? nodeCommunity[nid] : '?';
+      const shared = [...(adj[resolved] || [])].filter(x => (adj[nid] || new Set()).has(x)).sort((a,b) => degree(b) - degree(a)).slice(0, 3);
+      out += `  J=${j.toFixed(3)}  [${n.type}] ${nid}  C${ncid}\n`;
+      out += `          via: ${shared.join(', ')}\n`;
+    });
+  }
+
+  out += '\n--- NAVIGATION ---\n';
+  if (scores.length) out += `  Inspect top match?            → node ${scores[0].nid}\n`;
+  out += `  Back to node detail?          → node ${resolved}\n`;
+  out += '  Back to home?                 → explore\n';
+  return out;
+}
+
+function cmdHelp() {
+  return `Ael's Mirror Explorer — commands:
+
+  explore                        Home — stats, communities, top nodes
+  community <id>                 All nodes in a cluster
+  node <name>                    Full detail — summary, connections
+  search <query>                 Keyword search (names, summaries)
+  subgraph <seed> [--hops N]     N-hop neighborhood from seed
+  path <from> -- <to>            Shortest path between two nodes
+  gaps <source>                  Community presence for a source
+  jaccard <name>                 Structural neighbors by Jaccard
+
+  Flags: --origin <name>  --type <type>  --full`;
+}
+
+// --- Command router ---
+
+function executeCommand(input) {
+  const parts = input.trim().split(/\s+/);
+  if (!parts.length || !parts[0]) return cmdHelp();
+  const cmd = parts[0].toLowerCase();
+  const rest = parts.slice(1);
+  const { origin, nodeType, full, remaining } = parseFlags(rest);
+
+  switch (cmd) {
+    case 'explore': return cmdExplore(origin, nodeType);
+    case 'community': return remaining.length ? cmdCommunity(remaining[0], origin) : 'Usage: community <id>';
+    case 'node': return remaining.length ? cmdNode(remaining.join(' ')) : 'Usage: node <name>';
+    case 'search': return remaining.length ? cmdSearch(remaining.join(' '), origin, nodeType) : 'Usage: search <query>';
+    case 'subgraph': return cmdSubgraph(rest);
+    case 'path': return cmdPath(rest);
+    case 'gaps': return remaining.length ? cmdGaps(remaining.join(' '), nodeType) : 'Usage: gaps <source>';
+    case 'jaccard': return remaining.length ? cmdJaccard(remaining.join(' ')) : 'Usage: jaccard <name>';
+    case 'help': return cmdHelp();
+    default: return `Unknown command: ${cmd}\nType 'help' for available commands.`;
+  }
+}
+
+// ============================================================
+// UI
+// ============================================================
+
+const sourceColors = {
+  'shorts': '#e5c07b', 'lumen-thread': '#61afef', 'meridian-thread': '#c678dd',
+  'ael-history': '#98c379', 'community': '#e06c75', 'ael': '#56b6c2',
+};
+
+function getColor(d) {
+  const o = Array.isArray(d.origin) ? d.origin[0] : d.origin;
+  return sourceColors[o] || '#888';
+}
+
+function getRadius(d, edges) {
+  const deg = edges.filter(e =>
+    (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id
+  ).length;
+  if (d.type === 'agent' || d.type === 'person') return Math.max(8, 6 + deg * 0.8);
+  return Math.max(4, Math.min(14, 4 + deg * 1.0));
+}
+
+// Divider
+const dividerEl = document.getElementById('divider');
+const termPanel = document.getElementById('terminal-panel');
+let isDragging = false;
+dividerEl.addEventListener('mousedown', (e) => { isDragging = true; dividerEl.classList.add('dragging'); e.preventDefault(); });
+document.addEventListener('mousemove', (e) => { if (!isDragging) return; termPanel.style.width = Math.max(280, Math.min(800, document.body.clientWidth - e.clientX - 2)) + 'px'; });
+document.addEventListener('mouseup', () => { isDragging = false; dividerEl.classList.remove('dragging'); });
+
+// Terminal
+const cmdInput = document.getElementById('cmd-input');
+const termOutput = document.getElementById('terminal-output');
+const commandHistory = [];
+let historyIndex = -1;
+
+cmdInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const cmd = cmdInput.value.trim();
+    if (!cmd) return;
+    commandHistory.push(cmd);
+    historyIndex = commandHistory.length;
+    runCommand(cmd);
+    cmdInput.value = '';
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (historyIndex > 0) { historyIndex--; cmdInput.value = commandHistory[historyIndex]; }
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (historyIndex < commandHistory.length - 1) { historyIndex++; cmdInput.value = commandHistory[historyIndex]; }
+    else { historyIndex = commandHistory.length; cmdInput.value = ''; }
+  }
+});
+
+function runCommand(cmd) {
+  const cmdDiv = document.createElement('div');
+  cmdDiv.className = 'cmd-line';
+  cmdDiv.textContent = `$ ${cmd}`;
+  termOutput.appendChild(cmdDiv);
+
+  const output = executeCommand(cmd);
+  const outDiv = document.createElement('div');
+  outDiv.className = 'cmd-output';
+  outDiv.textContent = output;
+  termOutput.appendChild(outDiv);
+  termOutput.scrollTop = termOutput.scrollHeight;
+}
+
+function highlightNode(name) {
+  d3.selectAll('circle')
+    .filter(d => d.id === name)
+    .transition().duration(200).attr('stroke', '#fff').attr('stroke-width', 3)
+    .transition().duration(800).attr('stroke', 'none').attr('stroke-width', 0);
+}
+
+function showInfoPanel(d, edges) {
+  const panel = document.getElementById('info-panel');
+  panel.style.display = 'block';
+  document.getElementById('info-name').textContent = d.id;
+  const badge = document.getElementById('info-type');
+  badge.textContent = d.type;
+  badge.style.background = getColor(d);
+  badge.style.color = '#000';
+  document.getElementById('info-summary').textContent = d.summary || 'No summary.';
+
+  const connDiv = document.getElementById('info-connections');
+  connDiv.innerHTML = '';
+  const conns = edges.filter(e => (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id);
+  conns.slice(0, 12).forEach(e => {
+    const isSource = (e.source.id || e.source) === d.id;
+    const other = isSource ? (e.target.id || e.target) : (e.source.id || e.source);
+    const dir = isSource ? '→' : '←';
+    const item = document.createElement('div');
+    item.className = 'conn-item';
+    const otherEscaped = other.replace(/'/g, "\\'");
+    item.innerHTML = `<span class="pred">${dir} ${e.predicate}:</span> <span class="target" onclick="runCommand('node ${otherEscaped}')">${other}</span>`;
+    connDiv.appendChild(item);
+  });
+  if (conns.length > 12) {
+    const more = document.createElement('div');
+    more.className = 'conn-item';
+    more.style.color = '#555';
+    more.textContent = `+ ${conns.length - 12} more connections`;
+    connDiv.appendChild(more);
+  }
+}
+
+// Graph
+fetch('graph-data.json').then(r => r.json()).then(data => {
+  initExplorer(data);
+
+  const graphPanel = document.getElementById('graph-panel');
+  const width = graphPanel.clientWidth;
+  const height = graphPanel.clientHeight;
+
+  const svg = d3.select('#graph').append('svg').attr('width', width).attr('height', height);
+  const g = svg.append('g');
+
+  const zoom = d3.zoom().scaleExtent([0.3, 5]).on('zoom', (event) => g.attr('transform', event.transform));
+  svg.call(zoom);
+
+  const nodeMap = {};
+  data.nodes.forEach(n => { nodeMap[n.id] = n; });
+
+  const validEdges = data.edges.filter(e =>
+    nodeMap[e.source] && nodeMap[e.target] && e.predicate !== 'cosine_similarity'
+  );
+
+  const sim = d3.forceSimulation(data.nodes)
+    .force('link', d3.forceLink(validEdges).id(d => d.id).distance(80).strength(0.3))
+    .force('charge', d3.forceManyBody().strength(-200))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collision', d3.forceCollide().radius(d => getRadius(d, validEdges) + 2));
+
+  const link = g.append('g').selectAll('line').data(validEdges).join('line')
+    .attr('stroke', '#333').attr('stroke-opacity', 0.4).attr('stroke-width', 0.8);
+
+  const node = g.append('g').selectAll('circle').data(data.nodes).join('circle')
+    .attr('r', d => getRadius(d, validEdges))
+    .attr('fill', d => getColor(d))
+    .attr('stroke', 'none').attr('cursor', 'pointer')
+    .call(d3.drag()
+      .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+  const labels = g.append('g').selectAll('text')
+    .data(data.nodes.filter(d => {
+      const deg = validEdges.filter(e => (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id).length;
+      return deg >= 3 || d.type === 'agent' || d.type === 'person';
+    }))
+    .join('text')
+    .text(d => d.id.length > 25 ? d.id.slice(0, 22) + '...' : d.id)
+    .attr('font-size', 9).attr('fill', '#888').attr('dx', 10).attr('dy', 3);
+
+  node.on('mouseover', function(e, d) {
+    d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+    showInfoPanel(d, validEdges);
+  }).on('mouseout', function() {
+    d3.select(this).attr('stroke', 'none');
+  }).on('click', function(e, d) {
+    showInfoPanel(d, validEdges);
+    highlightNode(d.id);
+    runCommand(`node ${d.id}`);
+  });
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    labels.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  const observer = new ResizeObserver(() => {
+    const w = graphPanel.clientWidth, h = graphPanel.clientHeight;
+    svg.attr('width', w).attr('height', h);
+    sim.force('center', d3.forceCenter(w / 2, h / 2));
+    sim.alpha(0.05).restart();
+  });
+  observer.observe(graphPanel);
+});
+
+cmdInput.focus();
+</script>
+</body>
+</html>
