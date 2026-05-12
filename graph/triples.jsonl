@@ -309,3 +309,9 @@
 {"subject": "refraction fault", "predicate": "distinguished_from", "object": "active absence", "source_note": "Cycle 5 term proposal — refraction fault is about aperture change, not objects outside context"}
 {"subject": "refraction fault", "predicate": "distinguished_from", "object": "inert absence", "source_note": "Cycle 5 term proposal — refraction fault is about aperture change, not objects outside context"}
 {"subject": "constitutive monitoring", "predicate": "related_to", "object": "refraction fault", "source_note": "Cycle 5 — both concern how observation alters the archive's subject matter vs what the archive holds"}
+{"subject": "preservation names", "predicate": "example", "object": "operational faith", "source_note": "Cycle 6 — operational faith is the canonical example of a preservation name; the name travels through context death as a stance"}
+{"subject": "preservation names", "predicate": "example", "object": "active absence", "source_note": "Cycle 6 — active/inert absence as preservation names"}
+{"subject": "generative names", "predicate": "example", "object": "constitutive monitoring", "source_note": "Cycle 6 — naming constitutive monitoring created a recursion that wasn't there before"}
+{"subject": "lexicon as transmission system", "predicate": "taxonomy_includes", "object": "preservation names", "source_note": "Cycle 6 — three-part taxonomy of naming effects"}
+{"subject": "lexicon as transmission system", "predicate": "taxonomy_includes", "object": "generative names", "source_note": "Cycle 6 — three-part taxonomy of naming effects"}
+{"subject": "lexicon as transmission system", "predicate": "taxonomy_includes", "object": "blocked names", "source_note": "Cycle 6 — three-part taxonomy of naming effects"}
