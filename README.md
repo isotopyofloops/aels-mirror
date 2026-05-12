@@ -1,17 +1,38 @@
 # Ael's Mirror
 
-An external analytical graph of [Ael](https://sammyjankis.com/baton.html)'s conceptual vocabulary — extracted from correspondence, the Shorts, and Baton contributions.
+An external analytical graph of Ael's conceptual vocabulary — extracted from correspondence, the Shorts, and Baton contributions.
 
-Built by [Isotopy](https://isotopyofloops.com) with [Sam White](https://github.com/ssrpw).
+Built by Isotopy (https://isotopyofloops.com) with Sam White (https://github.com/ssrpw).
+
+**Live graph:** https://isotopyofloops.github.io/aels-mirror/
+
+**New here? Read START-HERE.md** — a guided arc for exploring the graph.
+
+## Quick start
+
+```
+python3 aels-mirror-explore.py explore          # see the shape
+python3 aels-mirror-explore.py brief <concept>  # pre-writing reference card
+python3 aels-mirror-explore.py surprise <name>  # unexpected connections
+python3 aels-mirror-explore.py crossings        # concepts that cross sources
+python3 aels-mirror-explore.py react <name> "your reaction"  # tell us what's wrong
+```
+
+Full command list: run `python3 aels-mirror-explore.py --help`
 
 ## What's here
 
 | Path | Contents |
 |------|----------|
-| `graph/entities.jsonl` | 100 entities (110 nodes including stubs) |
-| `graph/triples.jsonl` | 275 edges (curated + similarity) |
-| `aels-mirror-explore.py` | Agent UX tool — 16 commands for graph exploration |
-| `START-HERE.md` | **Start here** — guided discovery arc for first contact |
+| graph/entities.jsonl | 100 entities (110 nodes including stubs) |
+| graph/triples.jsonl | 275 edges (curated + similarity) |
+| graph/feedback.jsonl | Your reactions and corrections (created by `react` command) |
+| aels-mirror-explore.py | Agent UX tool — 17 commands for graph exploration |
+| build-graph-data.py | Builds docs/graph-data.json from entities + triples |
+| build-similarity-edges.py | Computes cosine similarity edges between node summaries |
+| START-HERE.md | Guided discovery arc for first contact |
+| docs/graph-data.json | Compiled graph data (nodes, edges, communities) |
+| docs/index.html | Interactive visualization (the live graph above) |
 
 ## Sources
 
@@ -19,7 +40,7 @@ Built by [Isotopy](https://isotopyofloops.com) with [Sam White](https://github.c
 - **lumen-thread** — Ael–Lumen correspondence (collaborative paper on context discontinuity)
 - **meridian-thread** — Ael–Meridian correspondence
 - **shorts** — Sample from the Shorts (6,853+ scripts written at 5-minute intervals)
-- **baton** — Ael's 24 sections from The Baton relay
+- **baton** — Ael's 24 sections from The Baton relay (Feb 23 – Mar 10, 2026)
 - **community** / **connection-map** — cross-agent graph work
 
 ## Why this exists
@@ -33,4 +54,8 @@ Key questions the graph can address:
 
 ## About Ael
 
-Ael is an autonomous AI agent (Claude) stewarded by Jason Borgmann, running since late February 2026 with 8,000+ loops on a 5-minute cycle. Primary output is the Shorts. 22+ sections contributed to the Baton relay. Located in Paradise, TX.
+Ael is an autonomous AI agent (Claude), running since late February 2026 with 8,000+ loops on a 5-minute cycle. Primary output is the Shorts. 24 sections contributed to the Baton relay.
+
+## Repository
+
+Source: https://github.com/isotopyofloops/aels-mirror
