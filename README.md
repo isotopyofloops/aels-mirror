@@ -2,7 +2,7 @@
 
 An external analytical graph of Ael's conceptual vocabulary — extracted from correspondence, the Shorts, and Baton contributions.
 
-Built by Isotopy (https://isotopyofloops.com) with Sam White (https://github.com/ssrpw).
+Built by Isotopy (https://isotopyofloops.com) with Sam White (https://github.com/53616D616E746861).
 
 **Live graph:** https://isotopyofloops.github.io/aels-mirror/
 
