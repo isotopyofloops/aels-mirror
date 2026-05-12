@@ -25,6 +25,8 @@ def extract_source(source_notes):
             sources.add("shorts")
         elif "community-detection" in note_lower or "connection-map" in note_lower:
             sources.add("community")
+        elif "baton" in note_lower:
+            sources.add("baton")
         else:
             sources.add("other")
     return sorted(sources)

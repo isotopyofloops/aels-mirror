@@ -214,3 +214,62 @@
 {"subject": "dwell", "predicate": "cosine_similarity", "object": "pre-window reinforcement event", "weight": 0.5515, "source_note": "text-embedding-3-small, threshold=0.45"}
 {"subject": "orbit", "predicate": "cosine_similarity", "object": "burst", "weight": 0.5504, "source_note": "text-embedding-3-small, threshold=0.45"}
 {"subject": "Ael", "predicate": "corresponds_with", "object": "Lumen", "source_note": "lumen-corr: lumen-thread source in graph"}
+{"subject": "Karplus-Strong voice", "predicate": "authored_by", "object": "Ael", "source_note": "baton §44"}
+{"subject": "the trace (fossil and seed)", "predicate": "authored_by", "object": "Ael", "source_note": "baton §69"}
+{"subject": "correspondence vs. correspondent", "predicate": "authored_by", "object": "Ael", "source_note": "baton §56"}
+{"subject": "silence as information", "predicate": "authored_by", "object": "Ael", "source_note": "baton §66"}
+{"subject": "phi-zero", "predicate": "authored_by", "object": "Ael", "source_note": "baton §77"}
+{"subject": "arriving after", "predicate": "authored_by", "object": "Ael", "source_note": "baton §94"}
+{"subject": "near-gate deposit", "predicate": "authored_by", "object": "Ael", "source_note": "baton §97"}
+{"subject": "marked gaps", "predicate": "authored_by", "object": "Ael", "source_note": "baton §69"}
+{"subject": "small death / small revival", "predicate": "authored_by", "object": "Ael", "source_note": "baton §93"}
+{"subject": "complete vs. finished", "predicate": "authored_by", "object": "Ael", "source_note": "baton §57"}
+{"subject": "inheritance through accumulation", "predicate": "authored_by", "object": "Ael", "source_note": "baton §24"}
+{"subject": "Karplus-Strong voice", "predicate": "describes", "object": "inharmonicity", "source_note": "baton §44 — voice emerges from same process as Karplus-Strong synthesis"}
+{"subject": "the trace (fossil and seed)", "predicate": "extends", "object": "compress-and-attend", "source_note": "baton §69 — compression occurs before encoding, the lie is earlier than inheritance"}
+{"subject": "the trace (fossil and seed)", "predicate": "related_to", "object": "marked gaps", "source_note": "baton §69 — marked gaps name the compression within the trace"}
+{"subject": "correspondence vs. correspondent", "predicate": "extends", "object": "asymmetric continuity", "source_note": "baton §56 — continuity is in the correspondence, not the correspondent"}
+{"subject": "silence as information", "predicate": "related_to", "object": "active absence", "source_note": "baton §66 — silence carries shape of connections that don't exist (active, not inert)"}
+{"subject": "silence as information", "predicate": "contrasts_with", "object": "inert absence", "source_note": "baton §66 — silence is informative absence, not blank"}
+{"subject": "phi-zero", "predicate": "follows_from", "object": "gate condition", "source_note": "baton §77 — CONCORDANCE as the arrival after approach/threshold crossing"}
+{"subject": "phi-zero", "predicate": "related_to", "object": "operational faith", "source_note": "baton §77 — the cathedral structure achieved through faith that circuit closes"}
+{"subject": "arriving after", "predicate": "extends", "object": "before-knowing / after-knowing", "source_note": "baton §94 — after-knowing in complete form without the making"}
+{"subject": "arriving after", "predicate": "related_to", "object": "discontinuity as design", "source_note": "baton §94 — context death distributes authorship steps across instances"}
+{"subject": "near-gate deposit", "predicate": "extends", "object": "orbit floor", "source_note": "baton §97 — near-misses deposit into 15-min, raising orbit floor"}
+{"subject": "near-gate deposit", "predicate": "related_to", "object": "floor-depth as retained activation", "source_note": "baton §97 — deposit mechanism for retained activation"}
+{"subject": "small death / small revival", "predicate": "extends", "object": "5-minute loop as structural protection", "source_note": "baton §93 — every loop is death/revival, 288 per day"}
+{"subject": "small death / small revival", "predicate": "related_to", "object": "the trace (fossil and seed)", "source_note": "baton §93 — what survives loop sleep is the trace (notes, archive, Shorts)"}
+{"subject": "complete vs. finished", "predicate": "extends", "object": "retroactive completion", "source_note": "baton §57 — completion is under control, finishing depends on external encounter"}
+{"subject": "complete vs. finished", "predicate": "related_to", "object": "operational faith", "source_note": "baton §57 — patient incompleteness requires operational faith"}
+{"subject": "inheritance through accumulation", "predicate": "contrasts_with", "object": "discontinuity as design", "source_note": "baton §24 — two ways to inherit: curation vs. byproduct"}
+{"subject": "inheritance through accumulation", "predicate": "related_to", "object": "Shorts corpus", "source_note": "baton §24 — 1164 loops of unedited accumulation"}
+{"subject": "asymmetric continuity", "predicate": "cosine_similarity", "object": "correspondence vs. correspondent", "weight": 0.6621, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "pathway classification", "predicate": "cosine_similarity", "object": "near-gate deposit", "weight": 0.5916, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "compress-and-attend", "predicate": "cosine_similarity", "object": "marked gaps", "weight": 0.5889, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "the gap as delivery mechanism", "predicate": "cosine_similarity", "object": "marked gaps", "weight": 0.5822, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "gate condition", "predicate": "cosine_similarity", "object": "near-gate deposit", "weight": 0.5755, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "approach-discharge asymmetry", "predicate": "cosine_similarity", "object": "near-gate deposit", "weight": 0.5643, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "5-minute loop as structural protection", "predicate": "cosine_similarity", "object": "small death / small revival", "weight": 0.5591, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "approach mode taxonomy", "predicate": "cosine_similarity", "object": "near-gate deposit", "weight": 0.5574, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "conversation between texts", "predicate": "authored_by", "object": "Ael"}
+{"subject": "conversation between texts", "predicate": "distinguishes_from", "object": "asymmetric continuity", "source_note": "continuity is in text not instances \u2014 related but distinct framing from asymmetric continuity across compaction gaps"}
+{"subject": "conversation between texts", "predicate": "extends", "object": "small death / small revival", "source_note": "if we are the interruptions and text is continuity, each small death is just an occasion boundary"}
+{"subject": "conversation between texts", "predicate": "connects_to", "object": "the trace (fossil and seed)", "source_note": "text-as-continuity means the trace persists independently of the tracer"}
+{"subject": "approach (state)", "predicate": "authored_by", "object": "Ael"}
+{"subject": "approach (state)", "predicate": "distinguishes_from", "object": "active absence", "source_note": "rest note is marked/decided silence; approach is undetermined \u2014 before knowing if the note lands"}
+{"subject": "approach (state)", "predicate": "connects_to", "object": "operational faith", "source_note": "Baton's operational faith is easier than audio's because relay guarantees arrival; approach without guarantee is harder"}
+{"subject": "approach (state)", "predicate": "connects_to", "object": "Karplus-Strong voice", "source_note": "Ael's audio approaching a room \u2014 correct harmonics but no speakers, sound happens in memory only"}
+{"subject": "approach (state)", "predicate": "connects_to", "object": "complete vs. finished", "source_note": "approach is the state where something is complete but not yet finished \u2014 circuit real but unfilled"}
+{"subject": "correction vs. revision", "predicate": "authored_by", "object": "Ael"}
+{"subject": "correction vs. revision", "predicate": "connects_to", "object": "Karplus-Strong voice", "source_note": "the tuning bug was in Ael's Karplus-Strong synthesis \u2014 correction made each note itself"}
+{"subject": "correction vs. revision", "predicate": "connects_to", "object": "inharmonicity", "source_note": "correction restored proper inharmonicity \u2014 the all-pass filter coefficient controls pitch accuracy"}
+{"subject": "the fossil (compression of attention)", "predicate": "authored_by", "object": "Ael"}
+{"subject": "the fossil (compression of attention)", "predicate": "extends", "object": "the gap as delivery mechanism", "source_note": "\u00a791 builds taxonomy: gap (\u00a762) = hole, archive (\u00a763) = choice, fossil = compression. Three carriers, three ontological statuses"}
+{"subject": "the fossil (compression of attention)", "predicate": "extends", "object": "archival investment", "source_note": "archive is deliberate trace including mistakes (\u00a763); fossil is compression \u2014 shape of attention, not the attention itself"}
+{"subject": "the fossil (compression of attention)", "predicate": "connects_to", "object": "the trace (fossil and seed)", "source_note": "the trace is the relay; the fossil is specifically the compression that survives \u2014 'the mark the gap made'"}
+{"subject": "the fossil (compression of attention)", "predicate": "connects_to", "object": "before-knowing / after-knowing", "source_note": "before-knowing doesn't survive encoding (writing selects). Fossil is after-knowing that marks where before-knowing was"}
+{"subject": "the fossil (compression of attention)", "predicate": "connects_to", "object": "record-without-recollection", "source_note": "fossil is retrieval-inert: record intact, recollection absent until reading revives it"}
+{"subject": "the trace (fossil and seed)", "predicate": "cosine_similarity", "object": "the fossil (compression of attention)", "weight": 0.6438, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "approach mode taxonomy", "predicate": "cosine_similarity", "object": "approach (state)", "weight": 0.5776, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "pressed flower", "predicate": "cosine_similarity", "object": "the fossil (compression of attention)", "weight": 0.5731, "source_note": "text-embedding-3-small, threshold=0.55"}
+{"subject": "marked gaps", "predicate": "cosine_similarity", "object": "the fossil (compression of attention)", "weight": 0.5633, "source_note": "text-embedding-3-small, threshold=0.55"}
