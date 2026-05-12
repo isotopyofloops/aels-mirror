@@ -118,7 +118,7 @@ const EC = {
   same_phenomenon:'rgba(180,190,210,0.45)', describes_mechanism_of:'rgba(180,190,210,0.45)'
 };
 
-let NM={}, adj={}, EL=[], comms={}, NC={}, cy=null, hist=[], hidx=-1;
+let NM={}, adj={}, EL=[], comms={}, NC={}, cy=null, hist=[], hidx=-1, lastSimilar=null;
 
 function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function oc(o){
@@ -355,7 +355,7 @@ function cmdNode(name){
 function cmdSubgraph(args){
   let seeds=[],hops=1,verbose=false;
   for(let i=0;i<args.length;i++){
-    if(args[i]==='--hops'&&i+1<args.length){hops=parseInt(args[++i]);}
+    if(args[i]==='--hops'&&i+1<args.length){hops=Math.min(parseInt(args[++i]),2);}
     else if(args[i]==='--verbose')verbose=true;
     else seeds.push(args[i]);
   }
@@ -372,36 +372,48 @@ function cmdSubgraph(args){
   }
   const sgNodes=new Set(Object.keys(layer));
   const sgEdges=EL.filter(e=>sgNodes.has(e.source)&&sgNodes.has(e.target)&&e.predicate!=='cosine_similarity');
+  const totalNodes=Object.keys(NM).length;
+  const covPct=totalNodes?Math.round(sgNodes.size/totalNodes*100):0;
+  const covNote=covPct>40?`  (${covPct}% of graph)`:'';
   let o='';o+=HR();
   o+=`<span class="hdr">SUBGRAPH: ${rs.map(s=>nl(s)).join(', ')} — ${hops} hop(s)</span>\n`;
-  o+=HR();o+=`\n${sgNodes.size} nodes · ${sgEdges.length} curated edges\n`;
+  o+=HR();o+=`\n${sgNodes.size} nodes · ${sgEdges.length} curated edges${covNote}\n`;
+  const COMPACT_CAP=20;
   for(let d=0;d<=hops;d++){
     const label=d===0?'SEED':`HOP ${d}`;
     const ln=Object.entries(layer).filter(([,dd])=>dd===d).map(([id])=>id).sort((a,b)=>deg(b)-deg(a));
+    const compact=d>=2;
     o+=`\n--- ${label} (${ln.length} nodes) ---\n\n`;
-    for(const nid of ln){
+    const showNodes=compact?ln.slice(0,COMPACT_CAP):ln;
+    for(const nid of showNodes){
       if(!NM[nid])continue;
       const n=NM[nid];const localDeg=[...(adj[nid]||[])].filter(nb=>sgNodes.has(nb)).length;
-      const marker=rs.includes(nid)?' *':'';
-      let skel=n.skeleton||n.summary||'';if(skel.length>80)skel=skel.slice(0,77)+'...';
-      o+=`  [${esc(n.type).padEnd(12)}] ${nl(nid)}${marker}\n`;
-      o+=`               deg ${localDeg}/${deg(nid)}  ${esc(skel)}\n`;
+      if(compact){
+        o+=`  [${esc(n.type).padEnd(12)}] ${nl(nid)}  deg ${localDeg}/${deg(nid)}\n`;
+      }else{
+        const marker=rs.includes(nid)?' *':'';
+        let skel=n.skeleton||n.summary||'';if(skel.length>80)skel=skel.slice(0,77)+'...';
+        o+=`  [${esc(n.type).padEnd(12)}] ${nl(nid)}${marker}\n`;
+        o+=`               deg ${localDeg}/${deg(nid)}  ${esc(skel)}\n`;
+      }
     }
+    if(compact&&ln.length>COMPACT_CAP)o+=`  ... and ${ln.length-COMPACT_CAP} more (use ${cl('node <name>','node ...')} to inspect)\n`;
   }
   if(sgEdges.length){
     const pg2={};for(const e of sgEdges){if(!pg2[e.predicate])pg2[e.predicate]=[];pg2[e.predicate].push(e);}
-    o+=`\n--- EDGES ---\n\n`;
+    const edgeLimit=verbose?25:10;
+    o+=`\n--- EDGES${verbose?' (verbose)':''} ---\n\n`;
     for(const[pred,elist]of Object.entries(pg2).sort((a,b)=>b[1].length-a[1].length)){
       o+=`  ${esc(pred)} (${elist.length}):\n`;
-      const shown=verbose?elist:elist.slice(0,10);
+      const shown=elist.slice(0,edgeLimit);
       for(const e of shown)o+=`    ${nl(e.source)} → ${nl(e.target)}\n`;
-      if(!verbose&&elist.length>10)o+=`    ... and ${elist.length-10} more\n`;
+      if(elist.length>edgeLimit)o+=`    ... and ${elist.length-edgeLimit} more\n`;
     }
   }
   o+='\n--- NAVIGATION ---\n';
   for(const s of rs)o+=`  Back to seed detail?          → ${cl('node '+s)}\n`;
   o+=`  Deep dive on any node?        → ${cl('node <name>','node ...')}\n`;
-  if(hops<3)o+=`  Expand the neighborhood?      → ${cl('subgraph '+rs[0]+' --hops '+(hops+1))}\n`;
+  if(hops<2)o+=`  Expand the neighborhood?      → ${cl('subgraph '+rs[0]+' --hops '+(hops+1))}\n`;
   if(!verbose)o+=`  See all edges?                → ${cl('subgraph '+rs.join(' ')+' --hops '+hops+' --verbose')}\n`;
   o+=`  Looking for something else?   → ${cl('search <query>','search ...')}\n`;
   o+=`  Back to home?                 → ${cl('explore')}\n`;
@@ -526,18 +538,27 @@ function cmdGaps(name){
       }
     }
     if(lowPresence.length){
+      lowPresence.sort((a,b)=>(comms[b.cid]||[]).length-(comms[a.cid]||[]).length);
+      const MAX_DETAILED=5;
       o+='\n--- BLIND SPOTS (communities with <15% presence) ---\n\n';
-      for(const{cid:ci,pct,unconnected}of lowPresence){
-        o+=`  ${cl('community '+ci,'C'+ci)} (${Math.round(pct)}% presence)\n`;
-        if(unconnected.length){
-          o+='    top unconnected:\n';
-          for(const nid of unconnected.slice(0,5)){
-            if(!NM[nid])continue;
-            o+=`      [${esc(NM[nid].type)}] ${nl(nid)} (deg=${deg(nid)}, origin=${os(NM[nid].origin)})\n`;
+      for(let i=0;i<lowPresence.length;i++){
+        const{cid:ci,pct,unconnected}=lowPresence[i];
+        const sz=(comms[ci]||[]).length;
+        if(i<MAX_DETAILED){
+          o+=`  ${cl('community '+ci,'C'+ci)} (${Math.round(pct)}% presence, ${sz} nodes)\n`;
+          if(unconnected.length){
+            o+='    top unconnected:\n';
+            for(const nid of unconnected.slice(0,3)){
+              if(!NM[nid])continue;
+              o+=`      [${esc(NM[nid].type)}] ${nl(nid)} (deg=${deg(nid)}, origin=${os(NM[nid].origin)})\n`;
+            }
           }
+          o+='\n';
+        }else{
+          o+=`  ${cl('community '+ci,'C'+ci)} (${Math.round(pct)}%, ${sz} nodes)\n`;
         }
-        o+='\n';
       }
+      if(lowPresence.length>MAX_DETAILED)o+=`\n  (${lowPresence.length-MAX_DETAILED} smaller gaps shown in summary only)\n`;
     }
   }
   o+='\n--- NAVIGATION ---\n';
@@ -602,6 +623,311 @@ function cmdJaccard(name){
   return{html:o,hl:[r,...scores.slice(0,15).map(x=>x.nid)]};
 }
 
+function getSimLookup(){
+  const sl={};
+  for(const e of EL){
+    if(e.predicate==='cosine_similarity'){
+      const key=[e.source,e.target].sort().join('|');
+      sl[key]=e.weight||0;
+    }
+  }
+  return sl;
+}
+
+function cmdSimilar(name,page){
+  page=page||1;
+  const r=resolve(name);
+  if(!r)return{html:`Error: no node matching '${esc(name)}'\n  Try: ${cl('search '+name)}\n`,hl:[]};
+  const simNb=[];
+  for(const e of EL){
+    if(e.predicate!=='cosine_similarity')continue;
+    if(e.source===r)simNb.push({nid:e.target,w:e.weight||0});
+    else if(e.target===r)simNb.push({nid:e.source,w:e.weight||0});
+  }
+  simNb.sort((a,b)=>b.w-a.w);
+  const PS=10,total=simNb.length,pages=Math.ceil(total/PS);
+  page=Math.max(1,Math.min(page,pages));
+  const start=(page-1)*PS,shown=simNb.slice(start,start+PS);
+  lastSimilar={name:r,page,total};
+  let o='';o+=HR();
+  o+=`<span class="hdr">SIMILAR: ${nl(r)} — page ${page}/${pages} (${total} total)</span>\n`;o+=HR();
+  if(!shown.length){o+='\nNo similarity edges found for this node.\n';}
+  else{
+    o+='\n';
+    for(const{nid,w}of shown){
+      if(!NM[nid])continue;
+      let skel=NM[nid].skeleton||NM[nid].summary||'';if(skel.length>50)skel=skel.slice(0,47)+'...';
+      o+=`  ${w.toFixed(3)}  [${esc(NM[nid].type).padEnd(12)}] ${nl(nid)}\n         ${esc(skel)}\n`;
+    }
+  }
+  o+='\n--- NAVIGATION ---\n';
+  if(page<pages)o+=`  Next page?                    → ${cl('similar '+r+' '+(page+1))}\n`;
+  if(page>1)o+=`  Previous page?                → ${cl('similar '+r+' '+(page-1))}\n`;
+  o+=`  Back to node detail?          → ${cl('node '+r)}\n`;
+  o+=`  Back to home?                 → ${cl('explore')}\n`;
+  return{html:o,hl:[r,...shown.map(x=>x.nid)]};
+}
+
+function cmdConnections(name,page){
+  page=page||1;
+  const r=resolve(name);
+  if(!r)return{html:`Error: no node matching '${esc(name)}'\n  Try: ${cl('search '+name)}\n`,hl:[]};
+  const conns=[];
+  for(const e of EL){
+    if(e.predicate==='cosine_similarity')continue;
+    if(e.source===r)conns.push({nb:e.target,pred:e.predicate,dir:'→'});
+    else if(e.target===r)conns.push({nb:e.source,pred:e.predicate,dir:'←'});
+  }
+  const PS=10,total=conns.length,pages=Math.max(1,Math.ceil(total/PS));
+  page=Math.max(1,Math.min(page,pages));
+  const start=(page-1)*PS,shown=conns.slice(start,start+PS);
+  let o='';o+=HR();
+  o+=`<span class="hdr">CONNECTIONS: ${nl(r)} — page ${page}/${pages} (${total} total)</span>\n`;o+=HR();
+  if(!shown.length){o+='\nNo curated connections.\n';}
+  else{
+    o+='\n';
+    for(const{nb,pred,dir}of shown)o+=`  ${dir} ${esc(pred)}: ${nl(nb)}\n`;
+  }
+  o+='\n--- NAVIGATION ---\n';
+  if(page<pages)o+=`  Next page?                    → ${cl('connections '+r+' '+(page+1))}\n`;
+  if(page>1)o+=`  Previous page?                → ${cl('connections '+r+' '+(page-1))}\n`;
+  o+=`  Back to node detail?          → ${cl('node '+r)}\n`;
+  o+=`  Back to home?                 → ${cl('explore')}\n`;
+  return{html:o,hl:[r,...shown.map(x=>x.nb)]};
+}
+
+function cmdSurprise(name){
+  const r=resolve(name);
+  if(!r)return{html:`Error: no node matching '${esc(name)}'\n  Try: ${cl('search '+name)}\n`,hl:[]};
+  const sl=getSimLookup();
+  const curatedNb={};
+  for(const e of EL){
+    if(e.predicate==='cosine_similarity')continue;
+    if(e.source===r){if(!curatedNb[e.target])curatedNb[e.target]=[];curatedNb[e.target].push('→ '+e.predicate);}
+    else if(e.target===r){if(!curatedNb[e.source])curatedNb[e.source]=[];curatedNb[e.source].push('← '+e.predicate);}
+  }
+  const withSim=[],withoutSim=[];
+  for(const[nb,preds]of Object.entries(curatedNb)){
+    const key=[r,nb].sort().join('|');
+    const s=sl[key];
+    if(s!==undefined)withSim.push({nb,s,preds});
+    else withoutSim.push({nb,preds});
+  }
+  withSim.sort((a,b)=>a.s-b.s);
+  const highSimNoEdge=[];
+  for(const e of EL){
+    if(e.predicate!=='cosine_similarity')continue;
+    const other=e.source===r?e.target:e.target===r?e.source:null;
+    if(other&&!curatedNb[other])highSimNoEdge.push({nid:other,s:e.weight||0});
+  }
+  highSimNoEdge.sort((a,b)=>b.s-a.s);
+  const cid=NC[r]??'?';
+  let o='';o+=HR();o+=`<span class="hdr">SURPRISE: ${nl(r)}</span>\n`;o+=HR();
+  o+=`\n  node: ${nl(r)} (${esc(NM[r].type||'?')}, C${cid})\n`;
+  o+=`  curated neighbors: ${Object.keys(curatedNb).length}\n`;
+  o+=`  with similarity score: ${withSim.length}\n`;
+  if(withSim.length){
+    o+='\n--- UNEXPECTED CONNECTIONS (curated edge + low similarity) ---\n\n';
+    for(const{nb,s,preds}of withSim.slice(0,10)){
+      if(!NM[nb])continue;
+      const ncid=NC[nb]??'?';
+      o+=`  ${s.toFixed(3)}  [${esc(NM[nb].type)}] ${nl(nb)}  C${ncid}\n`;
+      for(const p of preds.slice(0,3))o+=`         ${esc(p)}\n`;
+    }
+  }else{
+    o+=`\n  No curated neighbors have similarity scores.\n  (Similarity edges cover ${Object.keys(sl).length} pairs in the graph.)\n`;
+  }
+  if(withoutSim.length)o+=`\n  (${withoutSim.length} curated neighbor(s) have no similarity score — cannot rank by surprise)\n`;
+  if(highSimNoEdge.length){
+    o+='\n--- SIMILAR BUT UNCONNECTED (high similarity, no curated edge) ---\n\n';
+    for(const{nid,s}of highSimNoEdge.slice(0,10)){
+      if(!NM[nid])continue;
+      o+=`  ${s.toFixed(3)}  [${esc(NM[nid].type)}] ${nl(nid)}  C${NC[nid]??'?'}\n`;
+    }
+  }
+  o+='\n--- NAVIGATION ---\n';
+  if(withSim.length)o+=`  Inspect a surprise?           → ${cl('node '+withSim[0].nb)}\n`;
+  if(highSimNoEdge.length)o+=`  Inspect an unconnected match? → ${cl('node '+highSimNoEdge[0].nid)}\n`;
+  o+=`  Structural view?              → ${cl('jaccard '+r)}\n`;
+  o+=`  Back to node detail?          → ${cl('node '+r)}\n`;
+  o+=`  Back to home?                 → ${cl('explore')}\n`;
+  return{html:o,hl:[r,...withSim.slice(0,10).map(x=>x.nb),...highSimNoEdge.slice(0,10).map(x=>x.nid)]};
+}
+
+function cmdBrief(name){
+  const r=resolve(name);
+  if(!r)return{html:`Error: no node matching '${esc(name)}'\n  Try: ${cl('search '+name)}\n`,hl:[]};
+  const n=NM[r];const d=deg(r);const cid=NC[r]??'?';
+  const origins=olist(n);
+  const curated=[];
+  for(const e of EL){
+    if(e.predicate==='cosine_similarity')continue;
+    if(e.source===r)curated.push({nb:e.target,pred:e.predicate,dir:'→'});
+    else if(e.target===r)curated.push({nb:e.source,pred:e.predicate,dir:'←'});
+  }
+  curated.sort((a,b)=>deg(b.nb)-deg(a.nb));
+  const simNb=[];
+  for(const e of EL){
+    if(e.predicate!=='cosine_similarity')continue;
+    if(e.source===r)simNb.push({nid:e.target,w:e.weight||0});
+    else if(e.target===r)simNb.push({nid:e.source,w:e.weight||0});
+  }
+  simNb.sort((a,b)=>b.w-a.w);
+  const sl=getSimLookup();
+  let surpriseEdge=null;
+  for(const{nb,pred,dir}of curated){
+    const key=[r,nb].sort().join('|');
+    const s=sl[key];
+    const nbCid=NC[nb]??'?';
+    if(s!==undefined&&s<0.4&&nbCid!==cid){surpriseEdge={nb,pred,dir,s};break;}
+  }
+  let summary=n.summary||'no summary';
+  if(summary.length>160)summary=summary.slice(0,157)+'...';
+  let o=`<span class="hdr">BRIEF: ${nl(r)}</span>\n`;
+  o+=`  ${esc(n.type||'?')}  C${cid}  deg=${d}  sources: ${origins.length?origins.sort().join(', '):'?'}\n`;
+  o+=`  ${esc(summary)}\n`;
+  if(curated.length){
+    o+=`\n  Key connections (${Math.min(5,curated.length)} of ${curated.length}):\n`;
+    for(const{nb,pred,dir}of curated.slice(0,5))o+=`    ${dir} ${esc(pred)}: ${nl(nb)}\n`;
+  }
+  if(simNb.length){
+    o+=`\n  Similar (${Math.min(3,simNb.length)} of ${simNb.length}):\n`;
+    for(const{nid,w}of simNb.slice(0,3)){
+      if(!NM[nid])continue;
+      let skel=NM[nid].skeleton||NM[nid].summary||'';if(skel.length>50)skel=skel.slice(0,47)+'...';
+      o+=`    ${w.toFixed(3)}  ${nl(nid)} — ${esc(skel)}\n`;
+    }
+  }
+  if(surpriseEdge){
+    const{nb,pred,dir,s}=surpriseEdge;
+    o+=`\n  Surprise: ${dir} ${esc(pred)}: ${nl(nb)}  (cos=${s.toFixed(3)}, different cluster)\n`;
+  }
+  o+=`\n  → ${cl('node '+r)}  → ${cl('surprise '+r)}  → ${cl('subgraph '+r)}\n`;
+  return{html:o,hl:[r]};
+}
+
+function cmdCrossings(){
+  const multi=[];
+  for(const[nid,n]of Object.entries(NM)){
+    const origins=olist(n);
+    if(origins.length>=2)multi.push({nid,n,origins});
+  }
+  multi.sort((a,b)=>b.origins.length-a.origins.length||a.nid.localeCompare(b.nid));
+  let o='';o+=HR();
+  o+=`<span class="hdr">CROSSINGS — concepts that appear in multiple sources (${multi.length} found)</span>\n`;
+  o+=HR();
+  o+='  These are the most load-bearing ideas: they travel across\n  contexts rather than staying local to one exchange.\n\n';
+  if(!multi.length){o+='  No multi-source concepts found.\n';}
+  else{
+    for(const{nid,n,origins}of multi.slice(0,20)){
+      let skel=n.skeleton||n.summary||'';if(skel.length>70)skel=skel.slice(0,67)+'...';
+      o+=`  [${esc(n.type).padEnd(12)}] ${nl(nid)}  deg=${deg(nid)}\n`;
+      o+=`                 sources: ${origins.sort().map(oo=>os(oo)).join(', ')}\n`;
+      o+=`                 ${esc(skel)}\n\n`;
+    }
+    if(multi.length>20)o+=`  ... and ${multi.length-20} more\n`;
+  }
+  o+='--- NAVIGATION ---\n';
+  if(multi.length)o+=`  Inspect one?                  → ${cl('node '+multi[0].nid)}\n`;
+  o+=`  How two sources overlap?      → ${cl('overlap <source1> <source2>','overlap ...')}\n`;
+  o+=`  Back to home?                 → ${cl('explore')}\n`;
+  return{html:o,hl:multi.slice(0,20).map(x=>x.nid)};
+}
+
+function cmdTimeline(name,full){
+  if(!validOrigins().includes(name.toLowerCase())){
+    return{html:`Error: '${esc(name)}' is not a known origin.\n  Valid origins: ${validOrigins().join(', ')}\n`,hl:[]};
+  }
+  const originSet=fByO(name);
+  const dated=[],undated=[];
+  for(const nid of originSet){
+    const n=NM[nid];
+    if(n.created_date)dated.push({nid,date:n.created_date});
+    else undated.push(nid);
+  }
+  dated.sort((a,b)=>a.date.localeCompare(b.date));
+  let o='';o+=HR();
+  o+=`<span class="hdr">TIMELINE: ${esc(name)} (${dated.length} dated, ${undated.length} undated)</span>\n`;o+=HR();
+  if(!dated.length){o+=`\n  No dated nodes found for ${esc(name)}.\n`;}
+  else{
+    o+=`\n  first contribution: ${dated[0].date}\n  latest contribution: ${dated[dated.length-1].date}\n`;
+    const weeks={};for(const{date}of dated){const d=new Date(date);const mon=d.toISOString().slice(0,10);const wk=mon.slice(0,10);const wkStart=new Date(d);wkStart.setDate(d.getDate()-d.getDay());const wkKey=wkStart.toISOString().slice(0,10);weeks[wkKey]=(weeks[wkKey]||0)+1;}
+    const maxWk=Math.max(...Object.values(weeks));
+    o+='\n--- ACTIVITY BY WEEK ---\n\n';
+    for(const[wk,count]of Object.entries(weeks).sort()){
+      const bar='█'.repeat(Math.round(count/maxWk*30));
+      o+=`  ${wk}  ${bar} ${count}\n`;
+    }
+    o+='\n--- WHAT APPEARED WHEN ---\n';
+    let curMonth='';
+    for(const{nid,date}of dated){
+      const n=NM[nid];const month=new Date(date+'T00:00:00').toLocaleString('en',{month:'long',year:'numeric'});
+      if(month!==curMonth){curMonth=month;o+=`\n  ${curMonth}\n`;}
+      o+=`    ${date}  [${esc(n.type)}] ${nl(nid)}  C${NC[nid]??'?'}\n`;
+    }
+    if(undated.length)o+=`\n  (${undated.length} nodes without dates not shown)\n`;
+  }
+  o+='\n--- NAVIGATION ---\n';
+  o+=`  Inspect a node?               → ${cl('node <name>','node ...')}\n`;
+  o+=`  Where hasn't ${esc(name)} reached?   → ${cl('gaps '+name)}\n`;
+  o+=`  Filter by this source?        → ${cl('explore --origin '+name)}\n`;
+  o+=`  Back to home?                 → ${cl('explore')}\n`;
+  return{html:o,hl:[...originSet]};
+}
+
+function cmdOverlap(src1,src2){
+  const vo=validOrigins();
+  if(!vo.includes(src1.toLowerCase()))return{html:`Error: '${esc(src1)}' not a known origin. Valid: ${vo.join(', ')}\n`,hl:[]};
+  if(!vo.includes(src2.toLowerCase()))return{html:`Error: '${esc(src2)}' not a known origin. Valid: ${vo.join(', ')}\n`,hl:[]};
+  const s1=fByO(src1),s2=fByO(src2);
+  const shared=[...s1].filter(x=>s2.has(x));
+  const only1=[...s1].filter(x=>!s2.has(x));
+  const only2=[...s2].filter(x=>!s1.has(x));
+  shared.sort((a,b)=>deg(b)-deg(a));
+  let o='';o+=HR();
+  o+=`<span class="hdr">OVERLAP: ${os(src1)} ∩ ${os(src2)}</span>\n`;o+=HR();
+  o+=`\n  ${os(src1)}: ${s1.size} nodes\n  ${os(src2)}: ${s2.size} nodes\n  shared: ${shared.length} nodes\n`;
+  o+=`  only ${os(src1)}: ${only1.length}\n  only ${os(src2)}: ${only2.length}\n`;
+  if(shared.length){
+    o+='\n--- SHARED NODES ---\n\n';
+    for(const nid of shared.slice(0,15)){
+      if(!NM[nid])continue;
+      o+=`  [${esc(NM[nid].type).padEnd(12)}] ${nl(nid)}  deg=${deg(nid)}  C${NC[nid]??'?'}\n`;
+    }
+    if(shared.length>15)o+=`  ... and ${shared.length-15} more\n`;
+  }
+  if(shared.length&&Object.keys(comms).length){
+    o+='\n--- JACCARD BY COMMUNITY ---\n\n';
+    for(const cid of Object.keys(comms).map(Number).sort((a,b)=>a-b)){
+      const members=new Set(comms[cid]);
+      const in1=[...members].filter(m=>s1.has(m)).length;
+      const in2=[...members].filter(m=>s2.has(m)).length;
+      if(in1===0&&in2===0)continue;
+      const inBoth=[...members].filter(m=>s1.has(m)&&s2.has(m)).length;
+      o+=`  C${cid}: ${os(src1)}=${in1} ${os(src2)}=${in2} shared=${inBoth}\n`;
+    }
+  }
+  o+='\n--- NAVIGATION ---\n';
+  if(shared.length)o+=`  Inspect a shared node?        → ${cl('node '+shared[0])}\n`;
+  o+=`  See ${esc(src1)}'s gaps?             → ${cl('gaps '+src1)}\n`;
+  o+=`  See ${esc(src2)}'s gaps?             → ${cl('gaps '+src2)}\n`;
+  o+=`  Back to home?                 → ${cl('explore')}\n`;
+  return{html:o,hl:[...shared,...only1,...only2]};
+}
+
+function cmdReact(){
+  let o='';o+=HR();o+='<span class="hdr">REACT</span>\n';o+=HR();
+  o+='\n  The react command records corrections and reactions to graph/feedback.jsonl.\n';
+  o+='  It requires filesystem access and is available in the CLI tool:\n\n';
+  o+='    python3 aels-mirror-explore.py react <node> "your reaction"\n\n';
+  o+='  Examples:\n';
+  o+='    react "asymmetric continuity" "this summary misses the key point"\n';
+  o+='    react "the trace" "this and the fossil should be one node"\n';
+  o+='\n--- NAVIGATION ---\n';
+  o+=`  Back to home?                 → ${cl('explore')}\n`;
+  return{html:o,hl:[]};
+}
+
 function helpText(){
   let o='';o+=HR();o+='<span class="hdr">AEL\'S MIRROR EXPLORER — HELP</span>\n';o+=HR();
   o+='\nAn agent-friendly interface to Ael\'s conceptual vocabulary graph.\n';
@@ -612,11 +938,19 @@ function helpText(){
   o+=`  ${cl('explore --type concept')}        Filter by node type\n`;
   o+=`  ${cl('community 0','community <id>')}              Browse a community cluster\n`;
   o+=`  ${cl('node Ael','node <name>')}                Deep dive on one node\n`;
+  o+=`  ${cl('brief Ael','brief <name>')}              Pre-writing reference card\n`;
   o+=`  ${cl('subgraph Ael --hops 1','subgraph <name> --hops N')}  Local neighborhood\n`;
+  o+=`  ${cl('similar Ael','similar <name>')}            Cosine-similarity neighbors\n`;
+  o+=`  ${cl('connections Ael','connections <name>')}       All curated edges for a node\n`;
+  o+=`  ${cl('surprise Ael','surprise <name>')}          Cross-community connections\n`;
   o+=`  ${cl('search interval dynamics','search <query>')}              Find nodes by keyword\n`;
   o+=`  ${cl('path Ael -- Meridian','path <from> -- <to>')}        Shortest path between nodes\n`;
   o+=`  ${cl('gaps shorts','gaps <origin>')}                Blind spots in a source's reach\n`;
+  o+=`  ${cl('crossings')}                     Concepts in multiple sources\n`;
+  o+=`  ${cl('timeline baton','timeline <origin>')}          Dated concepts from a source\n`;
+  o+=`  ${cl('overlap shorts baton','overlap <s1> <s2>')}       Shared concepts between sources\n`;
   o+=`  ${cl('jaccard Ael','jaccard <name>')}              Structural neighbors by Jaccard\n`;
+  o+=`  ${cl('react')}                         Record a correction (CLI only)\n`;
   o+='\n--- TIPS ---\n\n';
   o+='  Click any <span class="nl">highlighted node name</span> to inspect it\n';
   o+='  Click any <span class="cl">green command</span> to run it\n';
@@ -646,8 +980,16 @@ function run(input){
       case'path':result=cmdPath(rawArgs.filter(a=>a==='--'||!a.startsWith('--')));break;
       case'gaps':if(!rest.length){result={html:'Usage: gaps <origin>\n',hl:[]};}else result=cmdGaps(rest.join(' '));break;
       case'jaccard':if(!rest.length){result={html:'Usage: jaccard <name>\n',hl:[]};}else result=cmdJaccard(rest.join(' '));break;
+      case'similar':{const pg=rest.length>=2&&/^\d+$/.test(rest[rest.length-1])?parseInt(rest.pop()):1;if(!rest.length){result={html:'Usage: similar <name> [page]\n',hl:[]};}else result=cmdSimilar(rest.join(' '),pg);break;}
+      case'connections':{const pg=rest.length>=2&&/^\d+$/.test(rest[rest.length-1])?parseInt(rest.pop()):1;if(!rest.length){result={html:'Usage: connections <name> [page]\n',hl:[]};}else result=cmdConnections(rest.join(' '),pg);break;}
+      case'surprise':if(!rest.length){result={html:'Usage: surprise <name>\n',hl:[]};}else result=cmdSurprise(rest.join(' '));break;
+      case'brief':if(!rest.length){result={html:'Usage: brief <name>\n',hl:[]};}else result=cmdBrief(rest.join(' '));break;
+      case'crossings':result=cmdCrossings();break;
+      case'timeline':if(!rest.length){result={html:'Usage: timeline <origin>\n  Valid origins: '+validOrigins().join(', ')+'\n',hl:[]};}else result=cmdTimeline(rest.join(' '),full);break;
+      case'overlap':if(rest.length<2){result={html:'Usage: overlap <source1> <source2>\n  Valid origins: '+validOrigins().join(', ')+'\n',hl:[]};}else result=cmdOverlap(rest[0],rest[1]);break;
+      case'react':result=cmdReact();break;
       case'help':result={html:helpText(),hl:[]};break;
-      default:result={html:`Unknown command: ${esc(cmd)}\nCommands: ${cl('explore')}, ${cl('community <id>','community')}, ${cl('node <name>','node')}, ${cl('subgraph <name>','subgraph')}, ${cl('search <query>','search')}, ${cl('path <from> -- <to>','path')}, ${cl('gaps <origin>','gaps')}, ${cl('jaccard <name>','jaccard')}\n`,hl:[]};
+      default:result={html:`Unknown command: ${esc(cmd)}\nCommands: ${cl('explore')}, ${cl('community <id>','community')}, ${cl('node <name>','node')}, ${cl('subgraph <name>','subgraph')}, ${cl('search <query>','search')}, ${cl('path <from> -- <to>','path')}, ${cl('gaps <origin>','gaps')}, ${cl('jaccard <name>','jaccard')}, ${cl('similar <name>','similar')}, ${cl('connections <name>','connections')}, ${cl('surprise <name>','surprise')}, ${cl('brief <name>','brief')}, ${cl('crossings')}, ${cl('timeline <origin>','timeline')}, ${cl('overlap <s1> <s2>','overlap')}, ${cl('react')}\n`,hl:[]};
     }
   }catch(e){result={html:`Error: ${esc(e.message)}\n`,hl:[]};}
   document.getElementById('output').innerHTML=result.html;
