@@ -23,6 +23,11 @@ Usage:
     python3 aels-mirror-explore.py timeline <source>
     python3 aels-mirror-explore.py overlap <source1> <source2>
     python3 aels-mirror-explore.py jaccard <name>
+    python3 aels-mirror-explore.py brief <name>
+    python3 aels-mirror-explore.py crossings
+    python3 aels-mirror-explore.py react <name> "reaction text"
+
+New? Start with START-HERE.md
 """
 
 import json
@@ -706,7 +711,7 @@ def cmd_subgraph(args, nodes, adj, edges):
     i = 0
     while i < len(args):
         if args[i] == "--hops" and i + 1 < len(args):
-            hops = int(args[i + 1])
+            hops = min(int(args[i + 1]), 2)
             i += 2
         elif args[i] == "--verbose":
             verbose = True
@@ -755,45 +760,56 @@ def cmd_subgraph(args, nodes, adj, edges):
     seed_label = ", ".join(resolved_seeds)
     print(f"SUBGRAPH: {seed_label} — {hops} hop(s)")
     print("=" * 60)
-    print(f"\n{len(subgraph_nodes)} nodes · {len(subgraph_edges)} curated edges")
+    total_nodes = len(nodes)
+    coverage_pct = len(subgraph_nodes) / total_nodes * 100 if total_nodes else 0
+    coverage_note = f"  ({coverage_pct:.0f}% of graph)" if coverage_pct > 40 else ""
+    print(f"\n{len(subgraph_nodes)} nodes · {len(subgraph_edges)} curated edges{coverage_note}")
 
+    COMPACT_CAP = 20
     for depth in range(hops + 1):
         label = "SEED" if depth == 0 else f"HOP {depth}"
         layer_nodes = [n for n, d in layer.items() if d == depth]
         layer_nodes.sort(key=lambda n: -len(adj.get(n, set())))
+        compact = depth >= 2
 
         print(f"\n--- {label} ({len(layer_nodes)} nodes) ---\n")
-        for nid in layer_nodes:
+        show_nodes = layer_nodes[:COMPACT_CAP] if compact else layer_nodes
+        for nid in show_nodes:
             n = nodes[nid]
             local_deg = sum(1 for nb in adj.get(nid, set()) if nb in subgraph_nodes)
             global_deg = len(adj.get(nid, set()))
             marker = " *" if nid in resolved_seeds else ""
-            skeleton = n.get("skeleton", n.get("summary", ""))
-            if len(skeleton) > 80:
-                skeleton = skeleton[:77] + "..."
-            print(f"  [{n['type']:12s}] {nid}{marker}")
-            print(f"               deg {local_deg}/{global_deg}  {skeleton}")
+            if compact:
+                print(f"  [{n['type']:12s}] {nid}  deg {local_deg}/{global_deg}")
+            else:
+                skeleton = n.get("skeleton", n.get("summary", ""))
+                if len(skeleton) > 80:
+                    skeleton = skeleton[:77] + "..."
+                print(f"  [{n['type']:12s}] {nid}{marker}")
+                print(f"               deg {local_deg}/{global_deg}  {skeleton}")
+        if compact and len(layer_nodes) > COMPACT_CAP:
+            print(f"  ... and {len(layer_nodes) - COMPACT_CAP} more (use node <name> to inspect)")
 
     if subgraph_edges:
         pred_groups = defaultdict(list)
         for e in subgraph_edges:
             pred_groups[e["predicate"]].append(e)
 
-        edge_limit = None if verbose else 10
+        edge_limit = 25 if verbose else 10
         print(f"\n--- EDGES{' (verbose)' if verbose else ''} ---\n")
         for pred, elist in sorted(pred_groups.items(), key=lambda x: -len(x[1])):
             print(f"  {pred} ({len(elist)}):")
-            shown = elist if verbose else elist[:edge_limit]
+            shown = elist[:edge_limit]
             for e in shown:
                 print(f"    {e['source']} → {e['target']}")
-            if not verbose and len(elist) > edge_limit:
+            if len(elist) > edge_limit:
                 print(f"    ... and {len(elist) - edge_limit} more")
 
     print(f"\n--- NAVIGATION ---")
     for s in resolved_seeds:
         print(f"  Back to seed detail?          → node {s}")
     print(f"  Deep dive on any node?        → node <name>")
-    if hops < 3:
+    if hops < 2:
         print(f"  Expand the neighborhood?      → subgraph {resolved_seeds[0]} --hops {hops + 1}")
     if not verbose:
         print(f"  See all edges?                → subgraph {' '.join(resolved_seeds)} --hops {hops} --verbose")
@@ -1144,21 +1160,28 @@ def cmd_gaps(name, nodes, adj, edges, community_data=None, node_type=None):
                 low_presence.append((cid, pct, len(present), len(members), top_unconnected, footholds))
 
         if low_presence:
+            MAX_DETAILED_GAPS = 5
+            low_presence.sort(key=lambda x: x[3], reverse=True)
             print(f"\n--- BLIND SPOTS (communities with <15% presence) ---\n")
-            for cid, pct, present_count, total, top_unc, footholds in low_presence:
-                print(f"  C{cid} ({pct:.0f}% presence)  → explore this gap: community {cid}")
-                if footholds:
-                    print(f"    your footholds:")
-                    for nid in footholds[:3]:
-                        n = nodes[nid]
-                        deg = len(adj.get(nid, set()))
-                        print(f"      [{n['type']}] {nid} (deg={deg})")
-                if top_unc:
-                    print(f"    top unconnected:")
-                    for nid in top_unc[:5]:
-                        n = nodes[nid]
-                        deg = len(adj.get(nid, set()))
-                        print(f"      [{n['type']}] {nid} (deg={deg}, origin={origin_str(n)})")
+            for i, (cid, pct, present_count, total, top_unc, footholds) in enumerate(low_presence):
+                if i < MAX_DETAILED_GAPS:
+                    print(f"  C{cid} ({pct:.0f}% presence, {total} nodes)  → community {cid}")
+                    if footholds:
+                        print(f"    your footholds:")
+                        for nid in footholds[:3]:
+                            n = nodes[nid]
+                            deg = len(adj.get(nid, set()))
+                            print(f"      [{n['type']}] {nid} (deg={deg})")
+                    if top_unc:
+                        print(f"    top unconnected:")
+                        for nid in top_unc[:3]:
+                            n = nodes[nid]
+                            deg = len(adj.get(nid, set()))
+                            print(f"      [{n['type']}] {nid} (deg={deg}, origin={origin_str(n)})")
+                else:
+                    print(f"  C{cid} ({pct:.0f}%, {total} nodes)  → community {cid}")
+            if len(low_presence) > MAX_DETAILED_GAPS:
+                print(f"\n  ({len(low_presence) - MAX_DETAILED_GAPS} smaller gaps shown in summary only)")
                 print()
 
     if node_type:
@@ -1544,6 +1567,169 @@ def cmd_jaccard(name, nodes, adj, edges, community_data=None):
     print(f"  Back to home?                 → explore")
 
 
+def cmd_crossings(nodes, adj, edges):
+    multi = []
+    for nid, n in nodes.items():
+        origins = origin_list(n)
+        if len(origins) >= 2:
+            multi.append((nid, n, origins))
+
+    multi.sort(key=lambda x: (-len(x[2]), x[0]))
+
+    print("=" * 60)
+    print(f"CROSSINGS — concepts that appear in multiple sources ({len(multi)} found)")
+    print("=" * 60)
+    print("  These are your most load-bearing ideas: they travel across")
+    print("  contexts rather than staying local to one exchange.\n")
+
+    if not multi:
+        print("  No multi-source concepts found.")
+        return
+
+    for nid, n, origins in multi[:20]:
+        deg = len(adj.get(nid, set()))
+        origin_tags = ", ".join(sorted(origins))
+        skeleton = n.get("skeleton", n.get("summary", ""))
+        if len(skeleton) > 70:
+            skeleton = skeleton[:67] + "..."
+        print(f"  [{n['type']:12s}] {nid}  deg={deg}")
+        print(f"                 sources: {origin_tags}")
+        print(f"                 {skeleton}\n")
+
+    if len(multi) > 20:
+        print(f"  ... and {len(multi) - 20} more")
+
+    print(f"--- NAVIGATION ---")
+    if multi:
+        print(f"  Inspect one?                  → node {multi[0][0]}")
+    print(f"  How two sources overlap?      → overlap <source1> <source2>")
+    print(f"  Back to home?                 → explore")
+
+
+def cmd_brief(name, nodes, adj, edges, node_community=None, neighbor_index=None):
+    resolved = resolve_node(name, nodes)
+    if not resolved:
+        print(f"Error: no node matching '{name}'")
+        print("  Try: search <keyword>")
+        return
+
+    n = nodes[resolved]
+    deg = len(adj.get(resolved, set()))
+    cid = node_community.get(resolved, "?") if node_community else "?"
+    origins = origin_list(n)
+
+    neighbor_edges = get_neighbors(resolved, adj, edges, neighbor_index=neighbor_index)
+
+    curated = []
+    for neighbor, edge_list in neighbor_edges.items():
+        for pred, direction in edge_list:
+            if pred != "cosine_similarity":
+                curated.append((neighbor, pred, direction))
+
+    curated.sort(key=lambda x: -len(adj.get(x[0], set())))
+
+    sim_neighbors = get_sim_neighbors(resolved, nodes, adj, edges, neighbor_index=neighbor_index)
+
+    sim_lookup = get_similarity_lookup(edges)
+    surprise_edge = None
+    for nb, pred, direction in curated:
+        key = tuple(sorted([resolved, nb]))
+        s = sim_lookup.get(key)
+        nb_cid = node_community.get(nb, "?") if node_community else "?"
+        if s is not None and s < 0.4 and nb_cid != cid:
+            surprise_edge = (nb, pred, direction, s)
+            break
+
+    print(f"BRIEF: {resolved}")
+    print(f"  {n.get('type', '?')}  C{cid}  deg={deg}  sources: {', '.join(sorted(origins)) if origins else '?'}")
+    summary = n.get("summary", "no summary")
+    if len(summary) > 160:
+        summary = summary[:157] + "..."
+    print(f"  {summary}")
+
+    if curated:
+        print(f"\n  Key connections ({min(5, len(curated))} of {len(curated)}):")
+        for nb, pred, direction in curated[:5]:
+            print(f"    {direction} {pred}: {nb}")
+
+    if sim_neighbors:
+        print(f"\n  Similar ({min(3, len(sim_neighbors))} of {len(sim_neighbors)}):")
+        for nb, w in sim_neighbors[:3]:
+            nb_skel = nodes[nb].get("skeleton", nodes[nb].get("summary", ""))
+            if len(nb_skel) > 50:
+                nb_skel = nb_skel[:47] + "..."
+            print(f"    {w:.3f}  {nb} — {nb_skel}")
+
+    if surprise_edge:
+        nb, pred, direction, s = surprise_edge
+        print(f"\n  Surprise: {direction} {pred}: {nb}  (cos={s:.3f}, different cluster)")
+
+    print(f"\n  → node {resolved}  → surprise {resolved}  → subgraph {resolved}")
+
+
+FEEDBACK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "graph", "feedback.jsonl")
+
+
+def cmd_react(args, nodes):
+    if len(args) < 2:
+        print("Usage: react <node-name> \"your reaction\"")
+        print("  Record a reaction, correction, or disagreement about a node.")
+        print("  Reactions are saved to graph/feedback.jsonl.")
+        print("\nExamples:")
+        print('  react "asymmetric continuity" "this summary misses the key point — it\'s about..."')
+        print('  react "the trace" "this and the fossil should be one node, not two"')
+        print('  react "marked gaps" "the connection to silence as information is the important one"')
+        return
+
+    quote_parts = " ".join(args)
+    in_node = True
+    node_parts = []
+    reaction_parts = []
+    for a in args:
+        if in_node and (a.startswith('"') or a.startswith("'")):
+            if node_parts:
+                in_node = False
+                reaction_parts.append(a)
+            else:
+                node_parts.append(a)
+        elif in_node:
+            node_parts.append(a)
+        else:
+            reaction_parts.append(a)
+
+    if not reaction_parts:
+        if len(node_parts) >= 2:
+            reaction_text = node_parts[-1].strip("\"'")
+            node_name = " ".join(node_parts[:-1])
+        else:
+            print("Usage: react <node-name> \"your reaction\"")
+            return
+    else:
+        node_name = " ".join(node_parts)
+        reaction_text = " ".join(reaction_parts)
+
+    node_name = node_name.strip("\"'")
+    reaction_text = reaction_text.strip("\"'")
+
+    resolved = resolve_node(node_name, nodes)
+    if not resolved:
+        print(f"Warning: no node matching '{node_name}' — recording reaction anyway")
+        resolved = node_name
+
+    import datetime, timezone
+    entry = {
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "node": resolved,
+        "reaction": reaction_text
+    }
+    with open(FEEDBACK_PATH, "a") as f:
+        f.write(json.dumps(entry) + "\n")
+
+    print(f"Recorded reaction for: {resolved}")
+    print(f"  \"{reaction_text}\"")
+    print(f"\nSaved to graph/feedback.jsonl — we'll read it.")
+
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
         print(__doc__.strip())
@@ -1556,7 +1742,7 @@ def main():
     origin, node_type, full, rest = parse_flags(rest)
 
     community_data = None
-    if cmd in ("explore", "community", "node", "similar", "next", "search", "timeline", "path", "overlap", "jaccard"):
+    if cmd in ("explore", "community", "node", "similar", "next", "search", "timeline", "path", "overlap", "jaccard", "brief"):
         community_data = compute_communities(nodes, adj, edges, precomputed=precomputed)
 
     if cmd == "explore":
@@ -1659,9 +1845,25 @@ def main():
             community_data = compute_communities(nodes, adj, edges, precomputed=precomputed)
         name = " ".join(rest)
         cmd_jaccard(name, nodes, adj, edges, community_data=community_data)
+    elif cmd == "brief":
+        if not rest:
+            print("Usage: brief <name>")
+            print("  Pre-writing reference card — summary, key connections, similar, surprise.")
+            return
+        if not community_data:
+            community_data = compute_communities(nodes, adj, edges, precomputed=precomputed)
+        name = " ".join(rest)
+        _, node_community = community_data
+        cmd_brief(name, nodes, adj, edges, node_community=node_community, neighbor_index=neighbor_index)
+    elif cmd == "crossings":
+        cmd_crossings(nodes, adj, edges)
+    elif cmd == "react":
+        cmd_react(rest, nodes)
     else:
         print(f"Unknown command: {cmd}")
-        print("Commands: explore, community, node, similar, next, subgraph, search, path, surprise, gaps, timeline, overlap, jaccard")
+        print("Commands: explore, community, node, similar, next, subgraph, search,")
+        print("         path, surprise, gaps, timeline, overlap, jaccard,")
+        print("         brief, crossings, react")
         print("Run with --help for usage.")
 
 

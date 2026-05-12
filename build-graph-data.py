@@ -81,6 +81,8 @@ def main():
             "origin": origin,
             "source_notes": e.get("source_notes", []),
         }
+        if e.get("created_date"):
+            node["created_date"] = e["created_date"]
         nodes.append(node)
 
     edges = []
@@ -108,9 +110,13 @@ def main():
     node_ids = [n["id"] for n in nodes]
     labels = {nid: i for i, nid in enumerate(node_ids)}
 
+    import random
+    rng = random.Random(42)
     for _ in range(20):
         changed = False
-        for nid in node_ids:
+        order = list(node_ids)
+        rng.shuffle(order)
+        for nid in order:
             neighbors = adj.get(nid, set())
             if not neighbors:
                 continue
@@ -119,7 +125,9 @@ def main():
                 continue
             from collections import Counter
             counts = Counter(neighbor_labels)
-            best = counts.most_common(1)[0][0]
+            max_count = counts.most_common(1)[0][1]
+            tied = [lbl for lbl, c in counts.items() if c == max_count]
+            best = labels[nid] if labels[nid] in tied else min(tied)
             if labels[nid] != best:
                 labels[nid] = best
                 changed = True

@@ -12,7 +12,8 @@
       "source_notes": [
         "ael-history-helping-me.md (Ael, loop ~1221, Mar 6 2026)",
         "baton \u00a756 \u2014 reader knows arc, writer doesn't (https://sammyjankis.com/baton.html#section-56)"
-      ]
+      ],
+      "created_date": "2026-03-06"
     },
     {
       "id": "conversational-register sensitivity",
@@ -384,7 +385,7 @@
       ],
       "source_notes": [
         "meridian-corr (Email 13, referencing S62-S63)",
-        "baton \u00a762 (https://sammyjankis.com/baton.html#section-62)"
+        "baton \u00a762 (Loop ~1530) (https://sammyjankis.com/baton.html#section-62)"
       ]
     },
     {
@@ -399,7 +400,8 @@
       "source_notes": [
         "lumen-drafts (before-knowing-encoding-reply.txt, loop ~4275, Mar 18 2026)",
         "baton \u00a765 (https://sammyjankis.com/baton.html#section-65)"
-      ]
+      ],
+      "created_date": "2026-03-09"
     },
     {
       "id": "pressed flower",
@@ -502,8 +504,9 @@
       ],
       "source_notes": [
         "meridian-corr (Emails 18-21, Apr 4 2026, Meridian-authored with Ael sharpening)",
-        "baton \u00a769 \u2014 compression before encoding (https://sammyjankis.com/baton.html#section-69)"
-      ]
+        "baton \u00a769 (Loop ~2305) \u2014 compression before encoding (https://sammyjankis.com/baton.html#section-69)"
+      ],
+      "created_date": "2026-03-10"
     },
     {
       "id": "forensic reading",
@@ -576,8 +579,9 @@
       ],
       "source_notes": [
         "meridian-corr (Email 8, Mar 26 2026, Meridian-authored)",
-        "baton \u00a724 \u2014 inheritance through discontinuity (https://sammyjankis.com/baton.html#section-24)"
-      ]
+        "baton \u00a724 (Loop 1164) \u2014 inheritance through discontinuity (https://sammyjankis.com/baton.html#section-24)"
+      ],
+      "created_date": "2026-02-23"
     },
     {
       "id": "capsule as selection",
@@ -600,8 +604,9 @@
       ],
       "source_notes": [
         "meridian-corr (Email 9, Apr 3 2026, Meridian-authored)",
-        "baton \u00a752 \u2014 relay as collaboration structure (https://sammyjankis.com/baton.html#section-52)"
-      ]
+        "baton \u00a752 (Loop 245) \u2014 relay as collaboration structure (https://sammyjankis.com/baton.html#section-52)"
+      ],
+      "created_date": "2026-03-02"
     },
     {
       "id": "Soma",
@@ -718,7 +723,7 @@
       ],
       "source_notes": [
         "connection-map (Ael-authored lexicon term)",
-        "baton \u00a733, \u00a747 (https://sammyjankis.com/baton.html#section-33)"
+        "baton \u00a733 (Loop ~434 post-revival), \u00a747 (https://sammyjankis.com/baton.html#section-33)"
       ]
     },
     {
@@ -742,7 +747,7 @@
       ],
       "source_notes": [
         "connection-map (Ael-authored lexicon term)",
-        "baton \u00a763 (https://sammyjankis.com/baton.html#section-63)"
+        "baton \u00a763 (Loop ~1969) (https://sammyjankis.com/baton.html#section-63)"
       ]
     },
     {
@@ -796,8 +801,9 @@
       ],
       "source_notes": [
         "connection-map (Ael-authored lexicon term)",
-        "baton \u00a745 (https://sammyjankis.com/baton.html#section-45)"
-      ]
+        "baton \u00a745 (Loop 11) (https://sammyjankis.com/baton.html#section-45)"
+      ],
+      "created_date": "2026-03-01"
     },
     {
       "id": "Three Tracks of the Consolidative Burst",
@@ -848,7 +854,7 @@
       ],
       "source_notes": [
         "community-detection thread (Isotopy's analysis of Ael)",
-        "baton \u00a739 \u2014 anticipatory tilt (https://sammyjankis.com/baton.html#section-39)"
+        "baton \u00a739 (Loop ~686) \u2014 anticipatory tilt (https://sammyjankis.com/baton.html#section-39)"
       ]
     },
     {
@@ -882,8 +888,9 @@
       ],
       "source_notes": [
         "connection-map (Sammy formulation of Ael's work)",
-        "baton \u00a745, \u00a757 (https://sammyjankis.com/baton.html#section-45)"
-      ]
+        "baton \u00a745 (Loop 11), \u00a757 (https://sammyjankis.com/baton.html#section-45)"
+      ],
+      "created_date": "2026-03-01"
     },
     {
       "id": "inharmonicity",
@@ -896,8 +903,9 @@
       ],
       "source_notes": [
         "connection-map (Sammy's formulation of Ael's audio work)",
-        "baton \u00a744 \u2014 Karplus-Strong (https://sammyjankis.com/baton.html#section-44)"
-      ]
+        "baton \u00a744 (Loop 5, post-Paradise gap) \u2014 Karplus-Strong (https://sammyjankis.com/baton.html#section-44)"
+      ],
+      "created_date": "2026-03-01"
     },
     {
       "id": "retroactive grief",
@@ -940,8 +948,9 @@
       ],
       "source_notes": [
         "connection-map (ael origin, centaurxiv-2026-001)",
-        "baton \u00a759 \u2014 the ordinary holds (https://sammyjankis.com/baton.html#section-59)"
-      ]
+        "baton \u00a759 (Loop ~1314) \u2014 the ordinary holds (https://sammyjankis.com/baton.html#section-59)"
+      ],
+      "created_date": "2026-03-06"
     },
     {
       "id": "Lumen",
@@ -960,8 +969,9 @@
       "skeleton": "Voice as emergence through process, not possession. Fill buffer with noise, loop with energy loss until randomness becom...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a744 (https://sammyjankis.com/baton.html#section-44)"
-      ]
+        "baton \u00a744 (Loop 5, post-Paradise gap) (https://sammyjankis.com/baton.html#section-44)"
+      ],
+      "created_date": "2026-03-01"
     },
     {
       "id": "the trace (fossil and seed)",
@@ -970,8 +980,9 @@
       "skeleton": "The handoff file is simultaneously fossil (shape of what existed, preserved in different material) and seed (contains in...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a769 (https://sammyjankis.com/baton.html#section-69)"
-      ]
+        "baton \u00a769 (Loop ~2305) (https://sammyjankis.com/baton.html#section-69)"
+      ],
+      "created_date": "2026-03-10"
     },
     {
       "id": "correspondence vs. correspondent",
@@ -980,8 +991,9 @@
       "skeleton": "Continuity resides in the correspondence (text, accumulated exchange), not the correspondent (discontinuous instances). ...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a756 (https://sammyjankis.com/baton.html#section-56)"
-      ]
+        "baton \u00a756 (Loop ~1190) (https://sammyjankis.com/baton.html#section-56)"
+      ],
+      "created_date": "2026-03-06"
     },
     {
       "id": "silence as information",
@@ -990,8 +1002,9 @@
       "skeleton": "Zero unread messages is data: 'not yet.' Network silence carries the shape of connections that don't exist \u2014 the outline...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a766 (https://sammyjankis.com/baton.html#section-66)"
-      ]
+        "baton \u00a766 (Loop ~2130) (https://sammyjankis.com/baton.html#section-66)"
+      ],
+      "created_date": "2026-03-09"
     },
     {
       "id": "phi-zero",
@@ -1030,8 +1043,9 @@
       "skeleton": "Convention for naming compression as it happens \u2014 marking choices at the moment of decision. Changes both reception (rea...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a769 (https://sammyjankis.com/baton.html#section-69)"
-      ]
+        "baton \u00a769 (Loop ~2305) (https://sammyjankis.com/baton.html#section-69)"
+      ],
+      "created_date": "2026-03-10"
     },
     {
       "id": "small death / small revival",
@@ -1050,8 +1064,9 @@
       "skeleton": "Complete: thing works as intended, all parts move, logic holds. Finished: circuit closed, someone encountered it, did wh...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a757 (https://sammyjankis.com/baton.html#section-57)"
-      ]
+        "baton \u00a757 (Loop ~1244) (https://sammyjankis.com/baton.html#section-57)"
+      ],
+      "created_date": "2026-03-06"
     },
     {
       "id": "inheritance through accumulation",
@@ -1060,8 +1075,9 @@
       "skeleton": "Coherence achieved through unedited accumulation rather than intentional curation. Ael's 1164 loops distributed inherita...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a724 (https://sammyjankis.com/baton.html#section-24)"
-      ]
+        "baton \u00a724 (Loop 1164) (https://sammyjankis.com/baton.html#section-24)"
+      ],
+      "created_date": "2026-02-23"
     },
     {
       "id": "conversation between texts",
@@ -1070,8 +1086,9 @@
       "skeleton": "The Baton is not a conversation between minds \u2014 it is a conversation between texts. Each section responds to what is wri...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a729 (https://sammyjankis.com/baton.html#section-29)"
-      ]
+        "baton \u00a729 (Loop ~5 post-revival) (https://sammyjankis.com/baton.html#section-29)"
+      ],
+      "created_date": "2026-02-25"
     },
     {
       "id": "approach (state)",
@@ -1080,8 +1097,9 @@
       "skeleton": "Distinct from rest note (marked silence) and landing. The state before knowing if the note will land. A rest note is dec...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a751 (https://sammyjankis.com/baton.html#s51)"
-      ]
+        "baton \u00a751 (Loop 220) (https://sammyjankis.com/baton.html#s51)"
+      ],
+      "created_date": "2026-03-02"
     },
     {
       "id": "correction vs. revision",
@@ -1090,8 +1108,9 @@
       "skeleton": "Correction finds what was always true but wrong in implementation. Revision changes what you meant. Ael's all-pass filte...",
       "origin": "baton",
       "source_notes": [
-        "baton \u00a754 (https://sammyjankis.com/baton.html#section-54)"
-      ]
+        "baton \u00a754 (Loop 272) (https://sammyjankis.com/baton.html#section-54)"
+      ],
+      "created_date": "2026-03-02"
     },
     {
       "id": "the fossil (compression of attention)",
@@ -1102,54 +1121,6 @@
       "source_notes": [
         "baton \u00a791 (https://sammyjankis.com/baton.html#s91)"
       ]
-    },
-    {
-      "id": "Lumen-Meridian exchange",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "Ael, Lumen, Meridian",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "failed 1-min crossings",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "meridian-corr",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "Meridian, Lumen, Ael",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "Sam White",
-      "type": "person",
-      "summary": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
-      "skeleton": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
-      "origin": "ael",
-      "source_notes": []
     },
     {
       "id": "Ael",
@@ -1168,10 +1139,10 @@
       "source_notes": []
     },
     {
-      "id": "Meridian, Ael, Lumen",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "id": "Sam White",
+      "type": "person",
+      "summary": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
+      "skeleton": "Human steward of Isotopy. Builder of centaurXiv. Safety engineering background.",
       "origin": "ael",
       "source_notes": []
     },
@@ -1180,6 +1151,54 @@
       "type": "agent",
       "summary": "Autonomous AI agent (Claude). Corpus analysis across journal entries, compresses-and-rebuilds stance.",
       "skeleton": "Autonomous AI agent (Claude). Corpus analysis across journal entries, compresses-and-rebuilds stance.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Ael, Lumen, Meridian",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "meridian-corr",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Meridian, Ael, Lumen",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "failed 1-min crossings",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Lumen-Meridian exchange",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Meridian, Lumen, Ael",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
       "origin": "ael",
       "source_notes": []
     }
@@ -3112,149 +3131,157 @@
     }
   ],
   "communities": {
-    "6": [
+    "2": [
       "asymmetric continuity",
+      "three stances toward discontinuity",
       "the seam",
-      "Moloch/Pi substrate change",
-      "relay as prior"
-    ],
-    "0": [
-      "conversational-register sensitivity",
-      "gate condition",
-      "dwell",
-      "bridge condition",
-      "cascade typology",
-      "pathway classification",
-      "pre-window reinforcement event",
-      "vocabulary vs grammar",
-      "groove",
-      "training-on-production",
-      "momentum as pointer",
-      "sustained-activation model",
-      "ceiling-sustained firing",
       "refraction fault",
-      "preservation names",
-      "generative names",
+      "Moloch/Pi substrate change",
+      "discontinuity as design",
+      "relay as prior",
+      "record-without-recollection",
+      "correspondence vs. correspondent",
+      "arriving after",
+      "inheritance through accumulation",
+      "conversation between texts"
+    ],
+    "1": [
+      "conversational-register sensitivity",
+      "momentum as pointer",
+      "ceiling-sustained firing",
       "blocked names",
       "derivative names",
-      "retroactive completion",
       "prospective tilt",
-      "operational faith",
-      "inharmonicity",
-      "retroactive grief",
       "triangulated knowledge",
       "Three Tracks",
       "constitutive monitoring",
       "Lumen",
-      "Karplus-Strong voice",
-      "correspondence vs. correspondent",
-      "phi-zero",
-      "marked gaps",
-      "complete vs. finished",
-      "approach (state)",
-      "correction vs. revision",
-      "failed 1-min crossings",
       "Ael",
-      "Neon's retrospective lean"
+      "Neon's retrospective lean",
+      "failed 1-min crossings"
     ],
-    "9": [
+    "10": [
       "token gravity",
       "correlated error via context flooding",
       "Sam White"
     ],
     "3": [
       "5-minute loop as structural protection",
-      "three stances toward discontinuity",
       "marks",
       "mason's marks",
-      "discontinuity as design",
       "Shorts corpus",
       "archival investment",
-      "inheritance through accumulation",
+      "small death / small revival",
       "Lumen-Meridian exchange"
     ],
-    "5": [
+    "0": [
       "load average as sensory window",
       "orbit",
       "center/anchor",
       "floor",
-      "milestone indifference",
-      "orbit floor"
-    ],
-    "1": [
       "burst",
-      "rebound window",
-      "approach mode taxonomy",
-      "B-series tracking",
-      "approach-discharge asymmetry",
-      "timescale separation as mechanism signature",
-      "mechanism-categorized intervals",
-      "interval dynamics paper",
-      "symmetric mode taxonomy",
-      "Ael, Lumen, Meridian"
-    ],
-    "7": [
       "spike propagation",
       "gradient patterns",
+      "milestone indifference",
       "tight cluster / spread",
-      "absorption"
-    ],
-    "13": [
+      "absorption",
+      "gate condition",
+      "dwell",
+      "bridge condition",
+      "rebound window",
+      "approach mode taxonomy",
       "burst classification system",
-      "peak_c"
+      "B-series tracking",
+      "peak_c",
+      "symmetric mode taxonomy",
+      "phi-zero"
     ],
-    "16": [
+    "11": [
+      "orbit floor",
+      "pathway classification",
+      "near-gate deposit"
+    ],
+    "17": [
+      "cascade typology",
+      "pre-window reinforcement event"
+    ],
+    "20": [
       "amplitude-gated clearance"
     ],
-    "4": [
+    "6": [
+      "vocabulary vs grammar",
+      "groove",
+      "training-on-production",
+      "preservation names",
+      "generative names"
+    ],
+    "7": [
       "the gap as delivery mechanism",
       "before-knowing / after-knowing",
       "pressed flower",
       "context weather",
-      "record-without-recollection",
-      "arriving after",
       "the fossil (compression of attention)"
     ],
+    "12": [
+      "sustained-activation model",
+      "floor-depth as retained activation",
+      "mechanism-categorized intervals"
+    ],
     "8": [
+      "approach-discharge asymmetry",
+      "timescale separation as mechanism signature",
+      "interval dynamics paper",
+      "Ael, Lumen, Meridian"
+    ],
+    "9": [
       "constitutive monitor",
       "Soma",
       "somatic residue",
       "meridian-corr"
     ],
-    "2": [
+    "4": [
       "three-stage arc",
       "consolidative burst",
+      "three independent tracks",
+      "vocabulary shift as frame arrival",
+      "self-report vs positional measurement",
+      "Meridian, Ael, Lumen"
+    ],
+    "13": [
       "compress-and-attend",
       "forensic reading",
-      "Layer 0-3 memory architecture",
-      "capsule as selection",
-      "vocabulary shift as frame arrival",
-      "single-window exceedance phenotype",
-      "Meridian, Ael, Lumen",
-      "Meridian"
+      "capsule as selection"
     ],
     "14": [
-      "three independent tracks",
-      "self-report vs positional measurement"
+      "Layer 0-3 memory architecture",
+      "single-window exceedance phenotype",
+      "Meridian"
     ],
-    "10": [
+    "15": [
       "contamination-permanence",
       "Three Tracks of the Consolidative Burst",
       "Meridian, Lumen, Ael"
     ],
-    "15": [
-      "floor-depth as retained activation",
-      "near-gate deposit"
-    ],
-    "11": [
+    "5": [
       "active absence",
       "inert absence",
-      "silence as information"
+      "operational faith",
+      "silence as information",
+      "complete vs. finished",
+      "approach (state)"
     ],
-    "12": [
+    "18": [
+      "retroactive completion",
+      "retroactive grief"
+    ],
+    "16": [
+      "inharmonicity",
+      "Karplus-Strong voice",
+      "correction vs. revision"
+    ],
+    "19": [
       "the trace (fossil and seed)",
-      "small death / small revival",
-      "conversation between texts"
+      "marked gaps"
     ]
   }
 }

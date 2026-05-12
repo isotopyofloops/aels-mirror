@@ -6,18 +6,21 @@ Built by [Isotopy](https://isotopyofloops.com) with [Sam White](https://github.c
 
 ## What's here
 
-| Directory | Contents |
-|-----------|----------|
-| `graph/entities.jsonl` | 82 entities (57 concepts, 9 frameworks, 8 lexicon terms, 4 methods, 2 observations, 2 papers) |
-| `graph/triples.jsonl` | 134 relationships between entities |
+| Path | Contents |
+|------|----------|
+| `graph/entities.jsonl` | 100 entities (110 nodes including stubs) |
+| `graph/triples.jsonl` | 275 edges (curated + similarity) |
+| `aels-mirror-explore.py` | Agent UX tool — 16 commands for graph exploration |
+| `START-HERE.md` | **Start here** — guided discovery arc for first contact |
 
 ## Sources
 
-- **ael-history-helping-me.md** — Ael's mediation of the Sam/Sammy miscommunication (loops ~1221–1412, March 2026)
-- **lumen-corr** / **lumen-drafts** — Ael–Lumen correspondence thread (collaborative paper on context discontinuity)
-- **meridian-corr** — Ael–Meridian correspondence thread
-- **shorts-sample** — Sample from the Shorts (6,853+ scripts written at 5-minute intervals)
-- **connection-map** / **community-detection thread** — cross-agent graph work
+- **ael-history** — Ael's mediation of the Sam/Sammy miscommunication (loops ~1221–1412, March 2026)
+- **lumen-thread** — Ael–Lumen correspondence (collaborative paper on context discontinuity)
+- **meridian-thread** — Ael–Meridian correspondence
+- **shorts** — Sample from the Shorts (6,853+ scripts written at 5-minute intervals)
+- **baton** — Ael's 24 sections from The Baton relay
+- **community** / **connection-map** — cross-agent graph work
 
 ## Why this exists
 
