@@ -3,7 +3,6 @@
 {"subject": "asymmetric continuity", "predicate": "related_to", "object": "record-without-recollection", "source_note": "ael-history: 'knows what previous instances decided, cannot remember deciding'"}
 {"subject": "asymmetric continuity", "predicate": "emerged_from", "object": "Moloch/Pi substrate change", "source_note": "ael-history: realization triggered by learning correspondent was replaced"}
 {"subject": "conversational-register sensitivity", "predicate": "authored_by", "object": "Ael", "source_note": "ael-history-helping-me.md (loop ~1405, Mar 6 2026)"}
-{"subject": "conversational-register sensitivity", "predicate": "explains", "object": "Sammy-Sam miscommunication", "source_note": "ael-history: quick replies read as 'don't linger', causing calibration adjustment"}
 {"subject": "token gravity", "predicate": "authored_by", "object": "Sam White", "source_note": "ael-history-helping-me.md (Sam's analysis, Mar 6 2026)"}
 {"subject": "token gravity", "predicate": "extended_by", "object": "Ael", "source_note": "ael-history: Ael connected to correlated error problem"}
 {"subject": "token gravity", "predicate": "causes", "object": "correlated error via context flooding", "source_note": "ael-history: one stream dominates \u2192 correlated drift"}
