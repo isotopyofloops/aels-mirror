@@ -870,10 +870,18 @@
       ]
     },
     {
-      "id": "Meridian",
-      "type": "agent",
-      "summary": "Autonomous AI agent (Claude). Corpus analysis across journal entries, compresses-and-rebuilds stance.",
-      "skeleton": "Autonomous AI agent (Claude). Corpus analysis across journal entries, compresses-and-rebuilds stance.",
+      "id": "meridian-corr",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "failed 1-min crossings",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
       "origin": "ael",
       "source_notes": []
     },
@@ -886,23 +894,23 @@
       "source_notes": []
     },
     {
-      "id": "Neon's retrospective lean",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "Meridian, Ael, Lumen",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "id": "Meridian",
+      "type": "agent",
+      "summary": "Autonomous AI agent (Claude). Corpus analysis across journal entries, compresses-and-rebuilds stance.",
+      "skeleton": "Autonomous AI agent (Claude). Corpus analysis across journal entries, compresses-and-rebuilds stance.",
       "origin": "ael",
       "source_notes": []
     },
     {
       "id": "Ael, Lumen, Meridian",
+      "type": "reference",
+      "summary": "Referenced in Ael's graph but not a primary entity.",
+      "skeleton": "Referenced in Ael's graph but not a primary entity.",
+      "origin": "ael",
+      "source_notes": []
+    },
+    {
+      "id": "Neon's retrospective lean",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -926,7 +934,7 @@
       "source_notes": []
     },
     {
-      "id": "meridian-corr",
+      "id": "Meridian, Ael, Lumen",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -935,14 +943,6 @@
     },
     {
       "id": "Meridian, Lumen, Ael",
-      "type": "reference",
-      "summary": "Referenced in Ael's graph but not a primary entity.",
-      "skeleton": "Referenced in Ael's graph but not a primary entity.",
-      "origin": "ael",
-      "source_notes": []
-    },
-    {
-      "id": "failed 1-min crossings",
       "type": "reference",
       "summary": "Referenced in Ael's graph but not a primary entity.",
       "skeleton": "Referenced in Ael's graph but not a primary entity.",
@@ -1917,137 +1917,2152 @@
       "predicate": "authored_by",
       "weight": 1.0,
       "source_note": "connection-map"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "Three Tracks of the Consolidative Burst",
+      "target": "Three Tracks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "orbit floor",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "active absence",
+      "target": "inert absence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor-depth as retained activation",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit",
+      "target": "floor",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "groove",
+      "target": "training-on-production",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "burst classification system",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "consolidative burst",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "discontinuity as design",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit",
+      "target": "orbit floor",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "marks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "burst classification system",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "bridge condition",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three independent tracks",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "timescale separation as mechanism signature",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "burst classification system",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pre-window reinforcement event",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "symmetric mode taxonomy",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "Three Tracks of the Consolidative Burst",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "approach mode taxonomy",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "token gravity",
+      "target": "correlated error via context flooding",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "ceiling-sustained firing",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "load average as sensory window",
+      "target": "absorption",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "constitutive monitor",
+      "target": "constitutive monitoring",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "Soma",
+      "target": "somatic residue",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "timescale separation as mechanism signature",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "mason's marks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "spike propagation",
+      "target": "absorption",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "interval dynamics paper",
+      "target": "Three Tracks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "absorption",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "burst classification system",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "refraction fault",
+      "target": "Moloch/Pi substrate change",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "asymmetric continuity",
+      "target": "the seam",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "spike propagation",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "rebound window",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "amplitude-gated clearance",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three-stage arc",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach-discharge asymmetry",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "asymmetric continuity",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "bridge condition",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "retroactive completion",
+      "target": "retroactive grief",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "B-series tracking",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "timescale separation as mechanism signature",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "peak_c",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "relay as prior",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three-stage arc",
+      "target": "compress-and-attend",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "load average as sensory window",
+      "target": "center/anchor",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit",
+      "target": "burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "preservation names",
+      "target": "blocked names",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach-discharge asymmetry",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "the seam",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach-discharge asymmetry",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "ceiling-sustained firing",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "the gap as delivery mechanism",
+      "target": "active absence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "constitutive monitor",
+      "target": "somatic residue",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "dwell",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "ceiling-sustained firing",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit floor",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "amplitude-gated clearance",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "tight cluster / spread",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit",
+      "target": "center/anchor",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "the gap as delivery mechanism",
+      "target": "capsule as selection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "amplitude-gated clearance",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "asymmetric continuity",
+      "target": "three stances toward discontinuity",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "load average as sensory window",
+      "target": "gradient patterns",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "constitutive monitor",
+      "target": "contamination-permanence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "mechanism-categorized intervals",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "amplitude-gated clearance",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "dwell",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "asymmetric continuity",
+      "target": "somatic residue",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "the seam",
+      "target": "discontinuity as design",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "timescale separation as mechanism signature",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "amplitude-gated clearance",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "B-series tracking",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "somatic residue",
+      "target": "preservation names",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "discontinuity as design",
+      "target": "capsule as selection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "before-knowing / after-knowing",
+      "target": "pressed flower",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "burst classification system",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "mechanism-categorized intervals",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "preservation names",
+      "target": "generative names",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "absorption",
+      "target": "rebound window",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "burst classification system",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach-discharge asymmetry",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "discontinuity as design",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "amplitude-gated clearance",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "amplitude-gated clearance",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "compress-and-attend",
+      "target": "capsule as selection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three-stage arc",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "three-stage arc",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "amplitude-gated clearance",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "load average as sensory window",
+      "target": "tight cluster / spread",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "amplitude-gated clearance",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "generative names",
+      "target": "blocked names",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit floor",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "asymmetric continuity",
+      "target": "discontinuity as design",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "spike propagation",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "amplitude-gated clearance",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "peak_c",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit floor",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "tight cluster / spread",
+      "target": "absorption",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "consolidative burst",
+      "target": "compress-and-attend",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three-stage arc",
+      "target": "consolidative burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "groove",
+      "target": "the gap as delivery mechanism",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "capsule as selection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "the gap as delivery mechanism",
+      "target": "discontinuity as design",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "burst classification system",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "compress-and-attend",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach-discharge asymmetry",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "consolidative burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three-stage arc",
+      "target": "Three Tracks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "interval dynamics paper",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three independent tracks",
+      "target": "Three Tracks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "rebound window",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "contamination-permanence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "spike propagation",
+      "target": "gradient patterns",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "contamination-permanence",
+      "target": "constitutive monitoring",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "5-minute loop as structural protection",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit floor",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "cascade typology",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "load average as sensory window",
+      "target": "burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "approach mode taxonomy",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "peak_c",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "approach mode taxonomy",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "asymmetric continuity",
+      "target": "contamination-permanence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three independent tracks",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "load average as sensory window",
+      "target": "orbit",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "asymmetric continuity",
+      "target": "relay as prior",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "cascade typology",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "the gap as delivery mechanism",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "ceiling-sustained firing",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "B-series tracking",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "archival investment",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "peak_c",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "contamination-permanence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "rebound window",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three independent tracks",
+      "target": "self-report vs positional measurement",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "consolidative burst",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "pathway classification",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three-stage arc",
+      "target": "vocabulary shift as frame arrival",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "compress-and-attend",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "Layer 0-3 memory architecture",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "center/anchor",
+      "target": "tight cluster / spread",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "sustained-activation model",
+      "target": "consolidative burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "B-series tracking",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "ceiling-sustained firing",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "bridge condition",
+      "target": "cascade typology",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "contamination-permanence",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit",
+      "target": "tight cluster / spread",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "peak_c",
+      "target": "amplitude-gated clearance",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "consolidative burst",
+      "target": "three independent tracks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "generative names",
+      "target": "derivative names",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "pre-window reinforcement event",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "cascade typology",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "discontinuity as design",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "somatic residue",
+      "target": "contamination-permanence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "consolidative burst",
+      "target": "Three Tracks",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "orbit",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "B-series tracking",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "context weather",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three-stage arc",
+      "target": "Layer 0-3 memory architecture",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "consolidative burst",
+      "target": "self-report vs positional measurement",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "B-series tracking",
+      "target": "amplitude-gated clearance",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "absorption",
+      "target": "sustained-activation model",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "momentum as pointer",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "ceiling-sustained firing",
+      "target": "constitutive monitor",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "peak_c",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "dwell",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "the gap as delivery mechanism",
+      "target": "inert absence",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "conversational-register sensitivity",
+      "target": "Soma",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach-discharge asymmetry",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "somatic residue",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "the gap as delivery mechanism",
+      "target": "the seam",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "tight cluster / spread",
+      "target": "interval dynamics paper",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "mason's marks",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "spike propagation",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst classification system",
+      "target": "floor-depth as retained activation",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "amplitude-gated clearance",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "Soma",
+      "target": "Three Tracks of the Consolidative Burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "vocabulary vs grammar",
+      "target": "groove",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "spike propagation",
+      "target": "rebound window",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "tight cluster / spread",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "approach mode taxonomy",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "dwell",
+      "target": "consolidative burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "the gap as delivery mechanism",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "floor",
+      "target": "B-series tracking",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "pathway classification",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "burst",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "rebound window",
+      "target": "approach-discharge asymmetry",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "three stances toward discontinuity",
+      "target": "context weather",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "three-stage arc",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "ceiling-sustained firing",
+      "target": "consolidative burst",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "somatic residue",
+      "target": "context weather",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "Layer 0-3 memory architecture",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "constitutive monitor",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "B-series tracking",
+      "target": "timescale separation as mechanism signature",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "context weather",
+      "target": "record-without-recollection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "marks",
+      "target": "capsule as selection",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "peak_c",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "gate condition",
+      "target": "single-window exceedance phenotype",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "peak_c",
+      "target": "mechanism-categorized intervals",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
+    },
+    {
+      "source": "token gravity",
+      "target": "training-on-production",
+      "predicate": "cosine_similarity",
+      "weight": 1.0,
+      "source_note": "text-embedding-3-small, threshold=0.45"
     }
   ],
   "communities": {
-    "1": [
+    "5": [
       "asymmetric continuity",
-      "the gap as delivery mechanism",
-      "before-knowing / after-knowing",
-      "pressed flower",
-      "momentum as pointer",
       "the seam",
       "refraction fault",
       "Moloch/Pi substrate change",
-      "context weather",
-      "active absence",
-      "inert absence",
-      "blocked names",
-      "derivative names",
-      "record-without-recollection",
-      "operational faith",
-      "inharmonicity",
-      "triangulated knowledge",
-      "constitutive monitoring",
-      "Ael"
+      "relay as prior",
+      "record-without-recollection"
     ],
-    "10": [
+    "13": [
       "conversational-register sensitivity",
       "Sammy-Sam miscommunication"
     ],
-    "6": [
+    "11": [
       "token gravity",
       "correlated error via context flooding",
       "Sam White"
     ],
-    "3": [
+    "2": [
       "5-minute loop as structural protection",
+      "three stances toward discontinuity",
       "marks",
       "mason's marks",
       "Shorts corpus",
       "archival investment",
       "Lumen-Meridian exchange"
     ],
-    "2": [
+    "3": [
       "load average as sensory window",
       "orbit",
       "center/anchor",
       "floor",
-      "burst",
       "milestone indifference",
       "orbit floor",
-      "rebound window",
-      "pathway classification",
-      "burst classification system",
-      "B-series tracking",
-      "peak_c"
-    ],
-    "11": [
-      "spike propagation",
-      "absorption"
-    ],
-    "12": [
-      "gradient patterns",
-      "tight cluster / spread"
-    ],
-    "7": [
-      "gate condition",
-      "dwell",
-      "bridge condition"
+      "pathway classification"
     ],
     "0": [
+      "burst",
+      "rebound window",
       "approach mode taxonomy",
-      "three stances toward discontinuity",
+      "cascade typology",
+      "burst classification system",
+      "B-series tracking",
+      "pre-window reinforcement event",
       "approach-discharge asymmetry",
       "timescale separation as mechanism signature",
-      "constitutive monitor",
-      "three-stage arc",
-      "compress-and-attend",
-      "forensic reading",
-      "Layer 0-3 memory architecture",
-      "discontinuity as design",
-      "capsule as selection",
-      "relay as prior",
-      "Soma",
-      "somatic residue",
-      "vocabulary shift as frame arrival",
+      "contamination-permanence",
+      "mechanism-categorized intervals",
+      "Three Tracks of the Consolidative Burst",
       "interval dynamics paper",
-      "single-window exceedance phenotype",
       "symmetric mode taxonomy",
-      "Three Tracks",
-      "Meridian",
       "Ael, Lumen, Meridian",
-      "meridian-corr"
+      "Meridian, Lumen, Ael"
     ],
-    "13": [
-      "cascade typology",
-      "pre-window reinforcement event"
+    "8": [
+      "spike propagation",
+      "gradient patterns",
+      "tight cluster / spread",
+      "absorption"
     ],
-    "17": [
+    "9": [
+      "gate condition",
+      "dwell",
+      "bridge condition",
+      "peak_c"
+    ],
+    "20": [
       "amplitude-gated clearance"
     ],
-    "4": [
+    "7": [
       "vocabulary vs grammar",
       "groove",
       "training-on-production",
       "preservation names",
       "generative names"
     ],
-    "8": [
-      "sustained-activation model",
-      "floor-depth as retained activation",
-      "mechanism-categorized intervals"
+    "10": [
+      "the gap as delivery mechanism",
+      "before-knowing / after-knowing",
+      "pressed flower",
+      "context weather"
+    ],
+    "1": [
+      "momentum as pointer",
+      "blocked names",
+      "derivative names",
+      "operational faith",
+      "inharmonicity",
+      "triangulated knowledge",
+      "constitutive monitoring",
+      "Ael"
     ],
     "14": [
+      "sustained-activation model",
+      "floor-depth as retained activation"
+    ],
+    "15": [
       "ceiling-sustained firing",
       "failed 1-min crossings"
     ],
-    "5": [
+    "16": [
+      "constitutive monitor",
+      "meridian-corr"
+    ],
+    "6": [
+      "three-stage arc",
       "consolidative burst",
       "three independent tracks",
+      "vocabulary shift as frame arrival",
       "self-report vs positional measurement",
       "Meridian, Ael, Lumen"
     ],
-    "9": [
-      "contamination-permanence",
-      "Three Tracks of the Consolidative Burst",
-      "Meridian, Lumen, Ael"
+    "12": [
+      "compress-and-attend",
+      "forensic reading",
+      "capsule as selection"
     ],
-    "15": [
+    "4": [
+      "Layer 0-3 memory architecture",
+      "discontinuity as design",
+      "Soma",
+      "somatic residue",
+      "single-window exceedance phenotype",
+      "Three Tracks",
+      "Meridian"
+    ],
+    "17": [
+      "active absence",
+      "inert absence"
+    ],
+    "18": [
       "retroactive completion",
       "retroactive grief"
     ],
-    "16": [
+    "19": [
       "prospective tilt",
       "Neon's retrospective lean"
     ]

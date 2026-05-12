@@ -94,8 +94,11 @@ def main():
             pass  # skip dangling edges silently
 
     # Compute communities via label propagation (no external deps)
+    # Only use curated edges — cosine_similarity is too dense and collapses clusters
     adj = defaultdict(set)
     for e in edges:
+        if e.get("predicate") == "cosine_similarity":
+            continue
         adj[e["source"]].add(e["target"])
         adj[e["target"]].add(e["source"])
 
