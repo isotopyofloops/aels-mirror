@@ -1716,7 +1716,7 @@ def cmd_react(args, nodes):
         print(f"Warning: no node matching '{node_name}' — recording reaction anyway")
         resolved = node_name
 
-    import datetime, timezone
+    import datetime
     entry = {
         "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "node": resolved,
